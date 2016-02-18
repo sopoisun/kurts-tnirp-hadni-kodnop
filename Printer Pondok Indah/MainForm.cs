@@ -25,7 +25,8 @@ namespace Printer_Pondok_Indah
         private Detail detail;
         private DataTable dataProduk;
         private JObject dataBayar, setting;
-        private string nota = "", id = "";
+        private string nota = "", id = "", _txt = "";
+        private int _length = 0;
         PrintDocument printdocument1 = new PrintDocument();
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -181,11 +182,17 @@ namespace Printer_Pondok_Indah
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 9} {2, 12}", "Tax", ":", this.dataBayar["tax"]);
+            this._txt = " "+this.dataBayar["tax_pro"]+"%";
+            this._length = 9 - this._txt.Length;
+
+            text = String.Format("          {0, -1} {1, "+this._length+"} {2, 12}", "Tax"+this._txt, ":", this.dataBayar["tax"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 3} {2, 12}", "Tax Bayar", ":", this.dataBayar["tax_bayar"]);
+            this._txt = " "+this.dataBayar["tax_bayar_pro"]+"%";
+            this._length = 5 - this._txt.Length;
+
+            text = String.Format("          {0, -1} {1, "+this._length+"} {2, 12}", "Tax Byr"+this._txt, ":", this.dataBayar["tax_bayar"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
