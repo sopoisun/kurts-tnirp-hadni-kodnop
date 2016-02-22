@@ -37,7 +37,7 @@ namespace Printer_Pondok_Indah
         private NameValueCollection data = new NameValueCollection();
         private string url = "http://localhost/restoran/public/api/";
 
-        private int HttpPost(string uri, NameValueCollection data)
+        private string HttpPost(string uri, NameValueCollection data)
         {
             try
             {
@@ -45,12 +45,12 @@ namespace Printer_Pondok_Indah
                 responsetBytes = webClient.UploadValues(uri, "POST", data);
                 resultString = Encoding.UTF8.GetString(responsetBytes);
                 webClient.Dispose();
-                return int.Parse(resultString);
+                return resultString;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return 0;
+                return null;
             }
         }
 
@@ -84,28 +84,46 @@ namespace Printer_Pondok_Indah
             }
         }
 
+        public string Login(string username, string password)
+        {
+            this.data = new NameValueCollection();
+            this.data["username"] = username;
+            this.data["password"] = password;
+
+            return this.HttpPost(this.url + "login", data);
+        }
+
         public DataTable GetTransaksi(string tanggal)
         {
-            DataSet ds = this.HttpGet(this.url + "transaksi?tanggal="+tanggal);
+            DataSet ds = this.HttpGet(this.url + "transaksi?api_token="+MainForm.TOKEN+"&tanggal="+tanggal);
             return ds.Tables[0];
-            return null;
         }
 
         public DataTable GetDetail(string id)
         {
-            DataSet ds = this.HttpGet(this.url + "transaksi/detail?id=" + id);
+            DataSet ds = this.HttpGet(this.url + "transaksi/detail?api_token=" + MainForm.TOKEN + "&id=" + id);
             return ds.Tables[0];
         }
 
         public JObject GetBayar(string id)
         {
-            return this.HttpGetSingle(this.url + "transaksi/bayar?id=" + id);
+            return this.HttpGetSingle(this.url + "transaksi/bayar?api_token=" + MainForm.TOKEN + "&id=" + id);
         }
 
         public JObject GetSetting()
         {
-            return this.HttpGetSingle(this.url + "setting");
+            return this.HttpGetSingle(this.url + "setting?api_token=" + MainForm.TOKEN);
         }
 
+        public DataTable GetProduk()
+        {
+            DataSet ds = this.HttpGet(this.url + "produk?api_token=" + MainForm.TOKEN);
+            return ds.Tables[0];
+        }
+
+        public int CheckStok(string produk_id, int qty)
+        {
+
+        }
     }
 }

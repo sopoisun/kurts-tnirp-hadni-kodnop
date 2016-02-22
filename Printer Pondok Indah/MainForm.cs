@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Drawing.Printing;
 
 namespace Printer_Pondok_Indah
 {
@@ -17,214 +16,90 @@ namespace Printer_Pondok_Indah
         public MainForm()
         {
             InitializeComponent();
-            printdocument1.PrintPage += printDocument1_PrintPage;
+
+            // Load Data
+            MainForm.SETTING = Connection.GetInstance().GetSetting();
+            MainForm.PRODUK = Connection.GetInstance().GetProduk();
         }
 
-        private DataGridViewButtonColumn btnPrint;
-        private DataGridViewButtonColumn btnDetail;
-        private Detail detail;
-        private DataTable dataProduk;
-        private JObject dataBayar, setting;
-        private string nota = "", id = "", _txt = "";
-        private int _length = 0;
-        PrintDocument printdocument1 = new PrintDocument();
+        private TransaksiForm transaksiForm;
+        private TransaksiTable transaksiTable;
+        private ProdukTable produkTable;
+
+        public static string TOKEN;
+        public static JObject SETTING;
+        public static DataTable PRODUK;
+
+        private void CloseMdiForm()
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                f.Close();
+            }
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            setting = Connection.GetInstance().GetSetting();
-
-            GetDataTransaksi();
+            this.transaksiToolStripMenuItem_Click(null, null);
         }
 
-        private void btnShow_Click(object sender, EventArgs e)
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            GetDataTransaksi();
+            Application.Exit();
         }
 
-        private void GetDataTransaksi()
+        private void transaksiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataTable dt = Connection.GetInstance().GetTransaksi(tanggal.Value.ToString("yyyy-MM-dd"));
-
-            dataGridView1.Columns.Clear();
-
-            if (dt.Rows.Count > 0)
+            foreach (Form f in this.MdiChildren)
             {
-                dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].HeaderText = "No";
-                dataGridView1.Columns[0].Width = 40;
-                dataGridView1.Columns[1].HeaderText = "ID";
-                dataGridView1.Columns[1].Width = 30;
-                dataGridView1.Columns[1].Name = "id";
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].HeaderText = "No. Nota";
-                dataGridView1.Columns[2].Width = 450;
-                dataGridView1.Columns[2].Name = "nota";
-                dataGridView1.Columns[3].HeaderText = "Status";
-                dataGridView1.Columns[3].Width = 150;
-                dataGridView1.Columns[3].Name = "status";
-                dataGridView1.Columns[4].HeaderText = "Karyawan";
-                dataGridView1.Columns[4].Width = 230;
-                dataGridView1.Columns[4].Name = "karyawan";
-
-                btnDetail = new DataGridViewButtonColumn();
-                btnDetail.Name = "btn_detail";
-                btnDetail.HeaderText = "Action";
-                btnDetail.Text = "Detail";
-                btnDetail.Width = 80;
-                btnDetail.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(btnDetail);
-
-                btnPrint = new DataGridViewButtonColumn();
-                btnPrint.Name = "btn_print";
-                btnPrint.HeaderText = "Action";
-                btnPrint.Text = "Print";
-                btnPrint.Width = 80;
-                btnPrint.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(btnPrint);
-            }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                this.nota = dataGridView1[dataGridView1.Columns["nota"].Index, e.RowIndex].Value.ToString();
-                this.id = dataGridView1[dataGridView1.Columns["id"].Index, e.RowIndex].Value.ToString();
-                string status = dataGridView1[dataGridView1.Columns["status"].Index, e.RowIndex].Value.ToString();
-
-                if (e.ColumnIndex == dataGridView1.Columns["btn_print"].Index && e.RowIndex >= 0)
-                {                    
-                    if (status == "Closed")
-                    {
-                        if (MessageBox.Show("Print nota " + nota + " ini ?", "Question",
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            dataProduk = Connection.GetInstance().GetDetail(this.id);
-                            dataBayar = Connection.GetInstance().GetBayar(this.id);
-
-                            this.PrintCsharp();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Belum Close, tidak bisa di print :)", "Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                if (e.ColumnIndex == dataGridView1.Columns["btn_detail"].Index && e.RowIndex >= 0)
+                if (f is TransaksiForm)
                 {
-                    detail = new Detail();
-                    detail.id = this.id;
-                    detail.nota = this.nota;
-                    detail.status = status;
-                    detail.ShowDialog();
+                    return;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            CloseMdiForm();
+            transaksiForm = new TransaksiForm();
+            transaksiForm.MdiParent = this;
+            transaksiForm.WindowState = FormWindowState.Maximized;
+            transaksiForm.DataProdukObj = MainForm.PRODUK;
+            transaksiForm.Show();
         }
 
-        private void PrintCsharp()
+        private void daftarTransaksiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrintDialog pd = new PrintDialog())
+            foreach (Form f in this.MdiChildren)
             {
-                printdocument1.PrinterSettings = pd.PrinterSettings;
-                printdocument1.Print();
+                if (f is TransaksiList)
+                {
+                    return;
+                }
             }
+
+            CloseMdiForm();
+            transaksiTable = new TransaksiTable();
+            transaksiTable.MdiParent = this;
+            transaksiTable.WindowState = FormWindowState.Maximized;
+            transaksiTable.setting = MainForm.SETTING;
+            transaksiTable.Show();
         }
 
-        void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void daftarProdukToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Font objFont = new Font("Courier New", 10F);//sets the font type and size
-            Font fontHeader = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);//sets the font type and size
-            //float fTopMargin = e.MarginBounds.Top;
-            float fTopMargin = 0;
-            float fLeftMargin = 5;//sets left margin
-            float fRightMargin = e.MarginBounds.Right - 150;//sets right margin
-
-            e.Graphics.DrawString(this.setting["title_faktur"].ToString(), fontHeader, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.7;//skip two lines
-            e.Graphics.DrawString(this.setting["alamat_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-            e.Graphics.DrawString(this.setting["telp_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.3;//skip two lines
-
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * 1;//skip two lines
-
-            e.Graphics.DrawString("Nota : " + this.nota + "\t\t" + DateTime.Now.Date.ToString("dd/MM/yyyy"), objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * 1;//skip two lines
-
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.3;//skip two lines
-
-            /* produk */
-            string text = "";
-            foreach (DataRow row in dataProduk.Rows)
+            foreach (Form f in this.MdiChildren)
             {
-                text = string.Concat(row["nama_produk"].ToString());
-                e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-                fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-                text = String.Format("   {0, -3} {1, 13} {2, 15}", row["qty"], row["harga"], row["subtotal"]);
-                e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-                fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+                if (f is ProdukTable)
+                {
+                    return;
+                }
             }
-            /* produk */
 
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * 1;//skip two lines
-
-            text = String.Format("          {0} {1, 7} {2, 12}", "Total", ":", this.dataBayar["total"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            this._txt = " "+this.dataBayar["tax_pro"]+"%";
-            this._length = 9 - this._txt.Length;
-
-            text = String.Format("          {0, -1} {1, "+this._length+"} {2, 12}", "Tax"+this._txt, ":", this.dataBayar["tax"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            this._txt = " "+this.dataBayar["tax_bayar_pro"]+"%";
-            this._length = 5 - this._txt.Length;
-
-            text = String.Format("          {0, -1} {1, "+this._length+"} {2, 12}", "Tax Byr"+this._txt, ":", this.dataBayar["tax_bayar"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            text = String.Format("          {0, -1} {1, 6} {2, 12}", "Jumlah", ":", this.dataBayar["jumlah"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            text = String.Format("          {0, -1} {1, 6} {2, 12}", "Diskon", ":", this.dataBayar["diskon"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            text = String.Format("          {0, -1} {1, 8} {2, 12}", "Sisa", ":", this.dataBayar["sisa"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            text = String.Format("          {0, -1} {1, 7} {2, 12}", "Bayar", ":", this.dataBayar["bayar"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            text = String.Format("          {0, -1} {1, 5} {2, 12}", "Kembali", ":", this.dataBayar["kembali"]);
-            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
-
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * 1;//skip two lines
-
-            e.Graphics.DrawString("TERIMA KASIH ATAS KUNJUNGAN ANDA", objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * 1;//skip two lines
-
-            objFont.Dispose();
-
-            e.HasMorePages = false;
+            CloseMdiForm();
+            produkTable = new ProdukTable();
+            produkTable.MdiParent = this;
+            produkTable.WindowState = FormWindowState.Maximized;
+            produkTable.DataProduk = MainForm.PRODUK;
+            produkTable.Show();
         }
-    }    
+    }
 }
