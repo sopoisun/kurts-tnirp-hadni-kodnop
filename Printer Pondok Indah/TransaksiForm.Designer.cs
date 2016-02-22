@@ -31,16 +31,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dgv_produk = new System.Windows.Forms.DataGridView();
-            this.no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.produk_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nama_produk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.harga = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_kasir = new System.Windows.Forms.TextBox();
             this.group_produk = new System.Windows.Forms.GroupBox();
+            this.qtyProduk = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.txt_produks = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,8 +44,19 @@
             this.dgv_place = new System.Windows.Forms.DataGridView();
             this.txt_places = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.qtyProduk = new System.Windows.Forms.TextBox();
+            this.dgvproduk_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_produk_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_nama_produk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_harga = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvproduk_btnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvplace_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvplace_place_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvplace_nama_tempat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvplace_harga = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvplace_btnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnSaveTransaksi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_produk)).BeginInit();
             this.group_produk.SuspendLayout();
             this.group_place.SuspendLayout();
@@ -82,61 +88,18 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_produk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_produk.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.no,
-            this.produk_id,
-            this.nama_produk,
-            this.harga,
-            this.qty,
-            this.subtotal,
-            this.btnDelete});
+            this.dgvproduk_no,
+            this.dgvproduk_produk_id,
+            this.dgvproduk_nama_produk,
+            this.dgvproduk_harga,
+            this.dgvproduk_qty,
+            this.dgvproduk_subtotal,
+            this.dgvproduk_btnDelete});
             this.dgv_produk.Location = new System.Drawing.Point(17, 55);
             this.dgv_produk.Name = "dgv_produk";
             this.dgv_produk.Size = new System.Drawing.Size(758, 266);
             this.dgv_produk.TabIndex = 2;
-            // 
-            // no
-            // 
-            this.no.HeaderText = "No";
-            this.no.Name = "no";
-            this.no.ReadOnly = true;
-            this.no.Width = 50;
-            // 
-            // produk_id
-            // 
-            this.produk_id.HeaderText = "Produk ID";
-            this.produk_id.Name = "produk_id";
-            this.produk_id.Visible = false;
-            // 
-            // nama_produk
-            // 
-            this.nama_produk.HeaderText = "Nama Produk";
-            this.nama_produk.Name = "nama_produk";
-            this.nama_produk.Width = 300;
-            // 
-            // harga
-            // 
-            this.harga.HeaderText = "Harga";
-            this.harga.Name = "harga";
-            this.harga.ReadOnly = true;
-            this.harga.Width = 150;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            this.qty.Width = 50;
-            // 
-            // subtotal
-            // 
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
-            this.subtotal.Width = 150;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.HeaderText = "Action";
-            this.btnDelete.Name = "btnDelete";
+            this.dgv_produk.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_produk_CellContentClick);
             // 
             // label2
             // 
@@ -147,13 +110,13 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Kasir";
             // 
-            // textBox1
+            // txt_kasir
             // 
-            this.textBox1.Location = new System.Drawing.Point(113, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(248, 20);
-            this.textBox1.TabIndex = 4;
+            this.txt_kasir.Location = new System.Drawing.Point(113, 22);
+            this.txt_kasir.Name = "txt_kasir";
+            this.txt_kasir.ReadOnly = true;
+            this.txt_kasir.Size = new System.Drawing.Size(248, 20);
+            this.txt_kasir.TabIndex = 4;
             // 
             // group_produk
             // 
@@ -171,6 +134,23 @@
             this.group_produk.TabIndex = 5;
             this.group_produk.TabStop = false;
             this.group_produk.Text = "Daftar Produk Yang Dibeli";
+            // 
+            // qtyProduk
+            // 
+            this.qtyProduk.Location = new System.Drawing.Point(509, 24);
+            this.qtyProduk.Name = "qtyProduk";
+            this.qtyProduk.Size = new System.Drawing.Size(58, 20);
+            this.qtyProduk.TabIndex = 5;
+            this.qtyProduk.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.qtyProduk_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(479, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Qty";
             // 
             // button1
             // 
@@ -190,7 +170,6 @@
             this.txt_produks.Name = "txt_produks";
             this.txt_produks.Size = new System.Drawing.Size(325, 20);
             this.txt_produks.TabIndex = 4;
-            this.txt_produks.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_produks_KeyPress);
             // 
             // label3
             // 
@@ -225,17 +204,27 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "Simpan";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dgv_place
             // 
+            this.dgv_place.AllowUserToAddRows = false;
+            this.dgv_place.AllowUserToDeleteRows = false;
             this.dgv_place.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_place.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_place.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvplace_no,
+            this.dgvplace_place_id,
+            this.dgvplace_nama_tempat,
+            this.dgvplace_harga,
+            this.dgvplace_btnDelete});
             this.dgv_place.Location = new System.Drawing.Point(17, 51);
             this.dgv_place.Name = "dgv_place";
             this.dgv_place.Size = new System.Drawing.Size(758, 73);
             this.dgv_place.TabIndex = 2;
+            this.dgv_place.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_place_CellContentClick);
             // 
             // txt_places
             // 
@@ -255,30 +244,110 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Nama Tempat";
             // 
-            // label5
+            // dgvproduk_no
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(479, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Qty";
+            this.dgvproduk_no.HeaderText = "No";
+            this.dgvproduk_no.Name = "dgvproduk_no";
+            this.dgvproduk_no.ReadOnly = true;
+            this.dgvproduk_no.Width = 50;
             // 
-            // qtyProduk
+            // dgvproduk_produk_id
             // 
-            this.qtyProduk.Location = new System.Drawing.Point(509, 24);
-            this.qtyProduk.Name = "qtyProduk";
-            this.qtyProduk.Size = new System.Drawing.Size(58, 20);
-            this.qtyProduk.TabIndex = 5;
+            this.dgvproduk_produk_id.HeaderText = "Produk ID";
+            this.dgvproduk_produk_id.Name = "dgvproduk_produk_id";
+            this.dgvproduk_produk_id.ReadOnly = true;
+            this.dgvproduk_produk_id.Visible = false;
+            // 
+            // dgvproduk_nama_produk
+            // 
+            this.dgvproduk_nama_produk.HeaderText = "Nama Produk";
+            this.dgvproduk_nama_produk.Name = "dgvproduk_nama_produk";
+            this.dgvproduk_nama_produk.ReadOnly = true;
+            this.dgvproduk_nama_produk.Width = 300;
+            // 
+            // dgvproduk_harga
+            // 
+            this.dgvproduk_harga.HeaderText = "Harga";
+            this.dgvproduk_harga.Name = "dgvproduk_harga";
+            this.dgvproduk_harga.ReadOnly = true;
+            this.dgvproduk_harga.Width = 150;
+            // 
+            // dgvproduk_qty
+            // 
+            this.dgvproduk_qty.HeaderText = "Qty";
+            this.dgvproduk_qty.Name = "dgvproduk_qty";
+            this.dgvproduk_qty.ReadOnly = true;
+            this.dgvproduk_qty.Width = 50;
+            // 
+            // dgvproduk_subtotal
+            // 
+            this.dgvproduk_subtotal.HeaderText = "Subtotal";
+            this.dgvproduk_subtotal.Name = "dgvproduk_subtotal";
+            this.dgvproduk_subtotal.ReadOnly = true;
+            this.dgvproduk_subtotal.Width = 150;
+            // 
+            // dgvproduk_btnDelete
+            // 
+            this.dgvproduk_btnDelete.HeaderText = "Delete";
+            this.dgvproduk_btnDelete.Name = "dgvproduk_btnDelete";
+            this.dgvproduk_btnDelete.Text = "Delete";
+            this.dgvproduk_btnDelete.UseColumnTextForButtonValue = true;
+            // 
+            // dgvplace_no
+            // 
+            this.dgvplace_no.HeaderText = "No";
+            this.dgvplace_no.Name = "dgvplace_no";
+            this.dgvplace_no.ReadOnly = true;
+            this.dgvplace_no.Width = 50;
+            // 
+            // dgvplace_place_id
+            // 
+            this.dgvplace_place_id.HeaderText = "Place ID";
+            this.dgvplace_place_id.Name = "dgvplace_place_id";
+            this.dgvplace_place_id.ReadOnly = true;
+            this.dgvplace_place_id.Visible = false;
+            // 
+            // dgvplace_nama_tempat
+            // 
+            this.dgvplace_nama_tempat.HeaderText = "Nama Tempat";
+            this.dgvplace_nama_tempat.Name = "dgvplace_nama_tempat";
+            this.dgvplace_nama_tempat.ReadOnly = true;
+            this.dgvplace_nama_tempat.Width = 300;
+            // 
+            // dgvplace_harga
+            // 
+            this.dgvplace_harga.HeaderText = "Harga";
+            this.dgvplace_harga.Name = "dgvplace_harga";
+            this.dgvplace_harga.ReadOnly = true;
+            this.dgvplace_harga.Width = 150;
+            // 
+            // dgvplace_btnDelete
+            // 
+            this.dgvplace_btnDelete.HeaderText = "Hapus";
+            this.dgvplace_btnDelete.Name = "dgvplace_btnDelete";
+            this.dgvplace_btnDelete.Text = "Hapus";
+            this.dgvplace_btnDelete.UseColumnTextForButtonValue = true;
+            // 
+            // btnSaveTransaksi
+            // 
+            this.btnSaveTransaksi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveTransaksi.Location = new System.Drawing.Point(733, 25);
+            this.btnSaveTransaksi.Name = "btnSaveTransaksi";
+            this.btnSaveTransaksi.Size = new System.Drawing.Size(87, 46);
+            this.btnSaveTransaksi.TabIndex = 7;
+            this.btnSaveTransaksi.Text = "Simpan Transaksi";
+            this.btnSaveTransaksi.UseVisualStyleBackColor = true;
+            this.btnSaveTransaksi.Click += new System.EventHandler(this.btnSaveTransaksi_Click);
             // 
             // TransaksiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 599);
+            this.Controls.Add(this.btnSaveTransaksi);
             this.Controls.Add(this.group_place);
             this.Controls.Add(this.group_produk);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_kasir);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label1);
@@ -302,17 +371,10 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridView dgv_produk;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_kasir;
         private System.Windows.Forms.GroupBox group_produk;
         private System.Windows.Forms.GroupBox group_place;
         private System.Windows.Forms.DataGridView dgv_place;
-        private System.Windows.Forms.DataGridViewTextBoxColumn no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn produk_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nama_produk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn harga;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
-        private System.Windows.Forms.DataGridViewButtonColumn btnDelete;
         private System.Windows.Forms.TextBox txt_produks;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
@@ -321,5 +383,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox qtyProduk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_produk_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_nama_produk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_harga;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_subtotal;
+        private System.Windows.Forms.DataGridViewButtonColumn dgvproduk_btnDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvplace_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvplace_place_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvplace_nama_tempat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvplace_harga;
+        private System.Windows.Forms.DataGridViewButtonColumn dgvplace_btnDelete;
+        private System.Windows.Forms.Button btnSaveTransaksi;
     }
 }

@@ -19,6 +19,7 @@ namespace Printer_Pondok_Indah
 
             // Load Data
             MainForm.SETTING = Connection.GetInstance().GetSetting();
+            MainForm.USER = Connection.GetInstance().GetUser();
             MainForm.PRODUK = Connection.GetInstance().GetProduk();
             MainForm.PLACE = Connection.GetInstance().GetPlace();
         }
@@ -28,7 +29,7 @@ namespace Printer_Pondok_Indah
         private ProdukTable produkTable;
 
         public static string TOKEN;
-        public static JObject SETTING;
+        public static JObject SETTING, USER;
         public static DataTable PRODUK, PLACE;
 
         private void CloseMdiForm()

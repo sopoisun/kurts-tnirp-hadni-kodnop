@@ -35,19 +35,23 @@ namespace Printer_Pondok_Indah
 
             dataGridView1.Columns[0].HeaderText = "No";
             dataGridView1.Columns[0].Width = 40;
-            dataGridView1.Columns[1].HeaderText = "Nama Produk";
-            dataGridView1.Columns[1].Width = 330;
-            dataGridView1.Columns[1].Name = "nama_produk";
-            dataGridView1.Columns[2].HeaderText = "Harga";
-            dataGridView1.Columns[2].Width = 130;
-            dataGridView1.Columns[2].Name = "harga_f";
-            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[1].HeaderText = "Produk ID";
+            dataGridView1.Columns[1].Width = 130;
+            dataGridView1.Columns[1].Name = "produk_id";
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].HeaderText = "Nama Produk";
+            dataGridView1.Columns[2].Width = 330;
+            dataGridView1.Columns[2].Name = "nama_produk";
             dataGridView1.Columns[3].HeaderText = "Harga";
             dataGridView1.Columns[3].Width = 130;
-            dataGridView1.Columns[3].Name = "harga";
-            dataGridView1.Columns[4].HeaderText = "Kategori";
-            dataGridView1.Columns[4].Width = 180;
-            dataGridView1.Columns[4].Name = "kategori";
+            dataGridView1.Columns[3].Name = "harga_f";
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[4].HeaderText = "Harga";
+            dataGridView1.Columns[4].Width = 130;
+            dataGridView1.Columns[4].Name = "harga";
+            dataGridView1.Columns[5].HeaderText = "Kategori";
+            dataGridView1.Columns[5].Width = 180;
+            dataGridView1.Columns[5].Name = "kategori";
         }
 
         private void txt_search_TextChanged(object sender, EventArgs e)

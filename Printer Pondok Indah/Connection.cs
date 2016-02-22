@@ -132,6 +132,11 @@ namespace Printer_Pondok_Indah
             return this.HttpGetSingle(this.url + "setting?api_token=" + MainForm.TOKEN);
         }
 
+        public JObject GetUser()
+        {
+            return this.HttpGetSingle(this.url + "user?api_token=" + MainForm.TOKEN);
+        }
+
         public DataTable GetProduk()
         {
             DataSet ds = this.HttpGet(this.url + "produk?api_token=" + MainForm.TOKEN);
@@ -147,7 +152,6 @@ namespace Printer_Pondok_Indah
         public int CheckStok(string produk_id, int qty)
         {
             string str = this.HttpGetOriginal(this.url + "produk/stok?api_token=" + MainForm.TOKEN + "&id=" + produk_id + "&qty=" + qty);
-            MessageBox.Show(str);
             return int.Parse(str);
         }
     }
