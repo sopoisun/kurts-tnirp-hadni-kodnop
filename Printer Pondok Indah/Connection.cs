@@ -84,6 +84,23 @@ namespace Printer_Pondok_Indah
             }
         }
 
+        private string HttpGetOriginal(string uri)
+        {
+            try
+            {
+                webClient = new WebClient();
+                responsetBytes = webClient.DownloadData(uri);
+                resultString = Encoding.UTF8.GetString(responsetBytes);
+                webClient.Dispose();
+                return resultString;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+
         public string Login(string username, string password)
         {
             this.data = new NameValueCollection();
@@ -121,9 +138,17 @@ namespace Printer_Pondok_Indah
             return ds.Tables[0];
         }
 
+        public DataTable GetPlace()
+        {
+            DataSet ds = this.HttpGet(this.url + "place?api_token=" + MainForm.TOKEN);
+            return ds.Tables[0];
+        }
+
         public int CheckStok(string produk_id, int qty)
         {
-
+            string str = this.HttpGetOriginal(this.url + "produk/stok?api_token=" + MainForm.TOKEN + "&id=" + produk_id + "&qty=" + qty);
+            MessageBox.Show(str);
+            return int.Parse(str);
         }
     }
 }

@@ -19,13 +19,14 @@ namespace Printer_Pondok_Indah
             InitializeComponent();
         }
 
-        public DataTable DataProdukObj;
-        private Dictionary<string, string> temporaryNama = new Dictionary<string, string>();
-        private int mark = 0;
+        public DataTable DataProdukObj, DataPlaceObj;
+        private string _produk_id;
+        private int _qty, _stokAccept;
 
         private void TransaksiForm_Load(object sender, EventArgs e)
         {
-            mark = 10;
+            txt_produks.AutoCompleteCustomSource = this.DataProduk();
+            txt_places.AutoCompleteCustomSource = this.DataPlace();
         }
 
         private AutoCompleteStringCollection DataProduk()
@@ -33,102 +34,58 @@ namespace Printer_Pondok_Indah
             AutoCompleteStringCollection data = new AutoCompleteStringCollection();
             foreach (DataRow row in DataProdukObj.Rows)
             {
-                data.Add(row["produk_id"].ToString());
+                data.Add(row["nama_produk"].ToString() + "     #" + row["produk_id"].ToString());
             }
             return data;
         }
 
-        private AutoCompleteStringCollection DataProdukNama()
+        private AutoCompleteStringCollection DataPlace()
         {
-            int temp = 0;
-            string str = "";
-
             AutoCompleteStringCollection data = new AutoCompleteStringCollection();
-            foreach (DataRow row in DataProdukObj.Rows)
+            foreach (DataRow row in DataPlaceObj.Rows)
             {
-                temp = 70 - row["nama_produk"].ToString().Length;
-
-                str = "";
-                for (int i = 0; i<temp; i++)
-                {
-                    str += " ";
-                }
-
-                data.Add(row["nama_produk"].ToString() + str + "#" + row["produk_id"].ToString());
+                data.Add(row["nama"].ToString() + "     #" + row["place_id"].ToString());
             }
             return data;
         }
 
-        private void dgv_produk_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
+                if (txt_produks.Text != "" && qtyProduk.Text != "")
                 {
-                    if (dgv_produk.CurrentCell.ColumnIndex == dgv_produk.Columns["produk_id"].Index)
+                    _produk_id = txt_produks.Text.Split('#')[1].ToString();
+                    _qty = int.Parse(qtyProduk.Text);
+
+                    _stokAccept = Connection.GetInstance().CheckStok(_produk_id, _qty);
+
+                    if (_stokAccept >= 1)
                     {
-                        tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                        tb.AutoCompleteCustomSource = DataProduk();
-                        tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    }
-                    else if (dgv_produk.CurrentCell.ColumnIndex == dgv_produk.Columns["nama_produk"].Index)
-                    {
-                        tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                        tb.AutoCompleteCustomSource = DataProdukNama();
-                        tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
                     }
                     else
                     {
-                        tb.AutoCompleteMode = AutoCompleteMode.None;
+                        MessageBox.Show("Stok tidak cukup !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }    
-        }
-
-        private void dgv_produk_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (dgv_produk.RowCount > 0 && mark >= 10)
+                else
                 {
-                    byte selectedRow = (byte)dgv_produk.CurrentCell.RowIndex;
-
-                    if ( e.ColumnIndex == dgv_produk.Columns["produk_id"].Index )
-                    {
-                        MessageBox.Show("Index produk_id Changed");
-                    }
-
-                    if (e.ColumnIndex == dgv_produk.Columns["nama_produk"].Index )
-                    {                        
-                        MessageBox.Show("Index nama_produk Changed");
-
-                        string key = dgv_produk[dgv_produk.Columns["nama_produk"].Index, selectedRow].Value.ToString().Split('#')[1];
-                        dgv_produk[dgv_produk.Columns["produk_id"].Index, selectedRow].Value = key;
-                    }
+                    MessageBox.Show("Input belum lengkap !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }    
+                MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }            
         }
 
-        private void dgv_produk_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void txt_produks_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (e.KeyChar == 13)
             {
-                dgv_produk[0, e.RowIndex - 1].Value = e.RowIndex;
-                dgv_produk[0, e.RowIndex].Value = e.RowIndex + 1;
+                qtyProduk.Focus();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Printer_Pondok_Indah
             // Load Data
             MainForm.SETTING = Connection.GetInstance().GetSetting();
             MainForm.PRODUK = Connection.GetInstance().GetProduk();
+            MainForm.PLACE = Connection.GetInstance().GetPlace();
         }
 
         private TransaksiForm transaksiForm;
@@ -28,7 +29,7 @@ namespace Printer_Pondok_Indah
 
         public static string TOKEN;
         public static JObject SETTING;
-        public static DataTable PRODUK;
+        public static DataTable PRODUK, PLACE;
 
         private void CloseMdiForm()
         {
@@ -63,6 +64,7 @@ namespace Printer_Pondok_Indah
             transaksiForm.MdiParent = this;
             transaksiForm.WindowState = FormWindowState.Maximized;
             transaksiForm.DataProdukObj = MainForm.PRODUK;
+            transaksiForm.DataPlaceObj = MainForm.PLACE;
             transaksiForm.Show();
         }
 
