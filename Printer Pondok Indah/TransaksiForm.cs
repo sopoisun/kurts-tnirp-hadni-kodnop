@@ -247,6 +247,7 @@ namespace Printer_Pondok_Indah
 
                         if (res > 0)
                         {
+                            MessageBox.Show("Sukses Open Transaksi.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.mainForm.daftarTransaksiToolStripMenuItem_Click(null, null);
                         }
                         else

@@ -310,18 +310,36 @@ namespace Printer_Pondok_Indah
             {
                 if (txt_bayar.Text != "")
                 {
-                    dvCustomer = new DataView(DataCustomerObj);
-                    dvCustomer.RowFilter = "customer_code = '" + txt_customer_ID.Text + "'";
+                    bool lanjut = true;
+                    string customerID = "";
 
-                    if (dvCustomer.Count > 0)
+                    if (txt_customer_ID.Text != "")
+                    {
+                        lanjut = false;
+                    }
+
+                    if (!lanjut)
+                    {
+                        dvCustomer = new DataView(DataCustomerObj);
+                        dvCustomer.RowFilter = "customer_code = '" + txt_customer_ID.Text + "'";
+                        if (dvCustomer.Count > 0)
+                        {
+                            customerID = dvCustomer[0]["customer_id"].ToString();
+                            lanjut = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("ID Customer tidak terdaftar", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+
+                    if (lanjut)
                     {
                         if (MessageBox.Show("Tutup Transaksi ??", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                                        == DialogResult.Yes)
+                                            == DialogResult.Yes)
                         {
-                            string customerID = dvCustomer[0]["customer_id"].ToString();
-
                             int diskon = int.Parse(txt_diskon.Text);
-                            int bayar = int.Parse(txt_bayar.Text);                            
+                            int bayar = int.Parse(txt_bayar.Text);
 
                             int res = int.Parse(Connection.GetInstance().CloseTransaksi(this.orderID, cmb_type_tax.SelectedValue.ToString(), this.tax_procentage.ToString(),
                                 diskon.ToString(), bayar.ToString(), cmb_type_bayar.SelectedItem.ToString().ToLower().Replace(" ", "_"), cmb_bank.SelectedValue.ToString(), this.tax_bayar_procentage.ToString(),
@@ -329,6 +347,7 @@ namespace Printer_Pondok_Indah
 
                             if (res > 0)
                             {
+                                MessageBox.Show("Sukses Close Transaksi.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.mainForm.daftarTransaksiToolStripMenuItem_Click(null, null);
                             }
                             else
@@ -336,10 +355,6 @@ namespace Printer_Pondok_Indah
                                 MessageBox.Show("Terjadi Kesalahan !!", "Error !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("ID Customer tidak terdaftar");
                     }
                 }
                 else

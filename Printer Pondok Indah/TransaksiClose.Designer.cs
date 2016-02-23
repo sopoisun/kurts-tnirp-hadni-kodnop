@@ -155,7 +155,7 @@
             // txt_kembali
             // 
             this.txt_kembali.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_kembali.Location = new System.Drawing.Point(588, 302);
+            this.txt_kembali.Location = new System.Drawing.Point(616, 302);
             this.txt_kembali.Multiline = true;
             this.txt_kembali.Name = "txt_kembali";
             this.txt_kembali.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -164,7 +164,7 @@
             // 
             // btnSaveTransaksi
             // 
-            this.btnSaveTransaksi.Location = new System.Drawing.Point(167, 346);
+            this.btnSaveTransaksi.Location = new System.Drawing.Point(175, 346);
             this.btnSaveTransaksi.Name = "btnSaveTransaksi";
             this.btnSaveTransaksi.Size = new System.Drawing.Size(148, 34);
             this.btnSaveTransaksi.TabIndex = 22;
@@ -176,7 +176,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(522, 305);
+            this.label15.Location = new System.Drawing.Point(530, 305);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(57, 16);
             this.label15.TabIndex = 46;
@@ -185,7 +185,7 @@
             // txt_bayar
             // 
             this.txt_bayar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_bayar.Location = new System.Drawing.Point(588, 262);
+            this.txt_bayar.Location = new System.Drawing.Point(616, 262);
             this.txt_bayar.Multiline = true;
             this.txt_bayar.Name = "txt_bayar";
             this.txt_bayar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -197,7 +197,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(532, 265);
+            this.label16.Location = new System.Drawing.Point(540, 265);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(44, 16);
             this.label16.TabIndex = 44;
@@ -206,7 +206,7 @@
             // txt_jumlah
             // 
             this.txt_jumlah.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_jumlah.Location = new System.Drawing.Point(588, 221);
+            this.txt_jumlah.Location = new System.Drawing.Point(616, 221);
             this.txt_jumlah.Multiline = true;
             this.txt_jumlah.Name = "txt_jumlah";
             this.txt_jumlah.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -217,7 +217,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(526, 224);
+            this.label13.Location = new System.Drawing.Point(534, 224);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 16);
             this.label13.TabIndex = 42;
@@ -226,7 +226,7 @@
             // txt_diskon
             // 
             this.txt_diskon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_diskon.Location = new System.Drawing.Point(588, 180);
+            this.txt_diskon.Location = new System.Drawing.Point(616, 180);
             this.txt_diskon.Multiline = true;
             this.txt_diskon.Name = "txt_diskon";
             this.txt_diskon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -238,7 +238,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(529, 183);
+            this.label14.Location = new System.Drawing.Point(537, 183);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(50, 16);
             this.label14.TabIndex = 40;
@@ -247,7 +247,7 @@
             // txt_total_akhir
             // 
             this.txt_total_akhir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_total_akhir.Location = new System.Drawing.Point(588, 141);
+            this.txt_total_akhir.Location = new System.Drawing.Point(616, 141);
             this.txt_total_akhir.Multiline = true;
             this.txt_total_akhir.Name = "txt_total_akhir";
             this.txt_total_akhir.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -258,7 +258,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(511, 144);
+            this.label6.Location = new System.Drawing.Point(519, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 16);
             this.label6.TabIndex = 38;
@@ -267,7 +267,7 @@
             // txt_tax_bayar
             // 
             this.txt_tax_bayar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_tax_bayar.Location = new System.Drawing.Point(588, 104);
+            this.txt_tax_bayar.Location = new System.Drawing.Point(616, 104);
             this.txt_tax_bayar.Multiline = true;
             this.txt_tax_bayar.Name = "txt_tax_bayar";
             this.txt_tax_bayar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -277,7 +277,7 @@
             // lbl_tax_bayar
             // 
             this.lbl_tax_bayar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_tax_bayar.Location = new System.Drawing.Point(490, 106);
+            this.lbl_tax_bayar.Location = new System.Drawing.Point(512, 108);
             this.lbl_tax_bayar.Name = "lbl_tax_bayar";
             this.lbl_tax_bayar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lbl_tax_bayar.Size = new System.Drawing.Size(82, 14);
@@ -288,7 +288,7 @@
             // txt_tax
             // 
             this.txt_tax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_tax.Location = new System.Drawing.Point(588, 65);
+            this.txt_tax.Location = new System.Drawing.Point(616, 65);
             this.txt_tax.Multiline = true;
             this.txt_tax.Name = "txt_tax";
             this.txt_tax.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -298,7 +298,7 @@
             // lbl_tax
             // 
             this.lbl_tax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_tax.Location = new System.Drawing.Point(490, 68);
+            this.lbl_tax.Location = new System.Drawing.Point(508, 68);
             this.lbl_tax.Name = "lbl_tax";
             this.lbl_tax.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lbl_tax.Size = new System.Drawing.Size(82, 13);
@@ -309,7 +309,7 @@
             // txt_total
             // 
             this.txt_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_total.Location = new System.Drawing.Point(588, 24);
+            this.txt_total.Location = new System.Drawing.Point(616, 24);
             this.txt_total.Multiline = true;
             this.txt_total.Name = "txt_total";
             this.txt_total.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -320,7 +320,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(538, 27);
+            this.label11.Location = new System.Drawing.Point(552, 27);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 16);
             this.label11.TabIndex = 32;
@@ -329,7 +329,7 @@
             // txt_customer
             // 
             this.txt_customer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_customer.Location = new System.Drawing.Point(167, 302);
+            this.txt_customer.Location = new System.Drawing.Point(175, 302);
             this.txt_customer.Multiline = true;
             this.txt_customer.Name = "txt_customer";
             this.txt_customer.Size = new System.Drawing.Size(282, 25);
@@ -350,7 +350,7 @@
             this.txt_customer_ID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_customer_ID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_customer_ID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_customer_ID.Location = new System.Drawing.Point(167, 262);
+            this.txt_customer_ID.Location = new System.Drawing.Point(175, 262);
             this.txt_customer_ID.Name = "txt_customer_ID";
             this.txt_customer_ID.Size = new System.Drawing.Size(282, 22);
             this.txt_customer_ID.TabIndex = 29;
@@ -370,7 +370,7 @@
             // txt_karyawan
             // 
             this.txt_karyawan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_karyawan.Location = new System.Drawing.Point(167, 180);
+            this.txt_karyawan.Location = new System.Drawing.Point(175, 180);
             this.txt_karyawan.Multiline = true;
             this.txt_karyawan.Name = "txt_karyawan";
             this.txt_karyawan.Size = new System.Drawing.Size(282, 25);
@@ -391,7 +391,7 @@
             this.cmb_bank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_bank.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmb_bank.FormattingEnabled = true;
-            this.cmb_bank.Location = new System.Drawing.Point(167, 141);
+            this.cmb_bank.Location = new System.Drawing.Point(175, 141);
             this.cmb_bank.Name = "cmb_bank";
             this.cmb_bank.Size = new System.Drawing.Size(282, 21);
             this.cmb_bank.TabIndex = 25;
@@ -410,7 +410,7 @@
             // txt_kasir
             // 
             this.txt_kasir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_kasir.Location = new System.Drawing.Point(167, 221);
+            this.txt_kasir.Location = new System.Drawing.Point(175, 221);
             this.txt_kasir.Multiline = true;
             this.txt_kasir.Name = "txt_kasir";
             this.txt_kasir.ReadOnly = true;
@@ -436,7 +436,7 @@
             "Tunai",
             "Debit",
             "Credit Card"});
-            this.cmb_type_bayar.Location = new System.Drawing.Point(167, 103);
+            this.cmb_type_bayar.Location = new System.Drawing.Point(175, 103);
             this.cmb_type_bayar.Name = "cmb_type_bayar";
             this.cmb_type_bayar.Size = new System.Drawing.Size(282, 21);
             this.cmb_type_bayar.TabIndex = 23;
@@ -457,7 +457,7 @@
             this.cmb_type_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_type_tax.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmb_type_tax.FormattingEnabled = true;
-            this.cmb_type_tax.Location = new System.Drawing.Point(167, 65);
+            this.cmb_type_tax.Location = new System.Drawing.Point(175, 65);
             this.cmb_type_tax.Name = "cmb_type_tax";
             this.cmb_type_tax.Size = new System.Drawing.Size(282, 21);
             this.cmb_type_tax.TabIndex = 21;
@@ -475,7 +475,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(167, 25);
+            this.dateTimePicker1.Location = new System.Drawing.Point(175, 25);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(282, 20);
             this.dateTimePicker1.TabIndex = 19;
