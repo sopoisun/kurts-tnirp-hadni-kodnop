@@ -198,5 +198,22 @@ namespace Printer_Pondok_Indah
 
             return this.HttpPost(this.url + "transaksi/change?api_token=" + MainForm.TOKEN, data);
         }
+
+        public string CloseTransaksi(string orderID, string tax_id, string tax_procentage, string diskon, string bayar, string type_bayar,
+            string bank_id, string tax_bayar_procentage, string customer_id)
+        {
+            this.data = new NameValueCollection();
+            this.data["id"] = orderID;
+            this.data["tax_id"] = tax_id;
+            this.data["tax_procentage"] = tax_procentage;
+            this.data["diskon"] = diskon;
+            this.data["bayar"] = bayar;
+            this.data["type_bayar"] = type_bayar;
+            this.data["bank_id"] = bank_id;
+            this.data["tax_bayar_procentage"] = tax_bayar_procentage;
+            this.data["customer_id"] = customer_id;
+
+            return this.HttpPost(this.url + "transaksi/close?api_token=" + MainForm.TOKEN, data);
+        }
     }
 }
