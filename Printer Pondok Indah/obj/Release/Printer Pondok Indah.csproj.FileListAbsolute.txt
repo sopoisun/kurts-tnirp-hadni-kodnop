@@ -4,16 +4,16 @@ C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\bin\Release\Newtonsoft.Json.pdb
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\bin\Release\Newtonsoft.Json.xml
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ChangePassword.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.Detail.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.Properties.Resources.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.csproj.GenerateResource.Cache
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.exe
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.pdb
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.MainForm.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.LoginForm.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiForm.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiTable.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ProdukTable.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiChange.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiClose.resources
-C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ChangePassword.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiForm.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.LoginForm.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.MainForm.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.Properties.Resources.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiTable.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.csproj.GenerateResource.Cache
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.exe
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.pdb

@@ -141,6 +141,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_username);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplikasi Kasir - Login";
