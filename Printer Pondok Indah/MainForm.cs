@@ -29,6 +29,7 @@ namespace Printer_Pondok_Indah
         private TransaksiTable transaksiTable;
         private ProdukTable produkTable;
         private TransaksiChange transaksiChange;
+        private TransaksiClose transaksiClose;
 
         public static string TOKEN;
         public static JObject SETTING, USER;
@@ -110,7 +111,7 @@ namespace Printer_Pondok_Indah
             produkTable.Show();
         }
 
-        public void OpenChangeTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
+        public void ChangeTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
         {
             foreach (Form f in this.MdiChildren)
             {
@@ -133,6 +134,28 @@ namespace Printer_Pondok_Indah
             transaksiChange.karyawan_id = karyawan_id;
             transaksiChange.karyawan = karyawan;
             transaksiChange.Show();
+        }
+
+        public void CloseTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is TransaksiClose)
+                {
+                    return;
+                }
+            }
+
+            CloseMdiForm();
+            transaksiClose = new TransaksiClose();
+            transaksiClose.MdiParent = this;
+            transaksiClose.WindowState = FormWindowState.Maximized;
+            transaksiClose.mainForm = this;
+            transaksiClose.orderID = orderID;
+            transaksiClose.nota = nota;
+            transaksiClose.karyawan_id = karyawan_id;
+            transaksiClose.karyawan = karyawan;
+            transaksiClose.Show();
         }
     }
 }

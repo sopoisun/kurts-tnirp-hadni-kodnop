@@ -94,7 +94,9 @@ namespace Printer_Pondok_Indah
             {
                 this.nota = dataGridView1[dataGridView1.Columns["nota"].Index, e.RowIndex].Value.ToString();
                 this.id = dataGridView1[dataGridView1.Columns["id"].Index, e.RowIndex].Value.ToString();
-                string status = dataGridView1[dataGridView1.Columns["status"].Index, e.RowIndex].Value.ToString();                
+                string status = dataGridView1[dataGridView1.Columns["status"].Index, e.RowIndex].Value.ToString();
+                string karyawan_id = dataGridView1[dataGridView1.Columns["karyawan_id"].Index, e.RowIndex].Value.ToString();
+                string nama_karyawan = dataGridView1[dataGridView1.Columns["karyawan"].Index, e.RowIndex].Value.ToString();
 
                 if (e.ColumnIndex == dataGridView1.Columns["btn_print"].Index && e.RowIndex >= 0)
                 {
@@ -111,12 +113,10 @@ namespace Printer_Pondok_Indah
                     }
                     else
                     {
-                        MessageBox.Show("Belum Close, tidak bisa di print :)", "Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.mainForm.CloseTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
                     }
                 }
-
-                if (e.ColumnIndex == dataGridView1.Columns["btn_detail"].Index && e.RowIndex >= 0)
+                else if (e.ColumnIndex == dataGridView1.Columns["btn_detail"].Index && e.RowIndex >= 0)
                 {
                     if (status == "Closed")
                     {
@@ -128,10 +128,7 @@ namespace Printer_Pondok_Indah
                     }
                     else
                     {
-                        string karyawan_id = dataGridView1[dataGridView1.Columns["karyawan_id"].Index, e.RowIndex].Value.ToString();
-                        string nama_karyawan = dataGridView1[dataGridView1.Columns["karyawan"].Index, e.RowIndex].Value.ToString();
-
-                        this.mainForm.OpenChangeTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
+                        this.mainForm.ChangeTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
                     }
                 }
             }

@@ -171,5 +171,14 @@ namespace Printer_Pondok_Indah
 
             return this.HttpPost(this.url + "transaksi/save?api_token=" + MainForm.TOKEN, data);
         }
+
+        public string ChangeTransaksi(string orderID, string data_order)
+        {
+            this.data = new NameValueCollection();
+            this.data["id"] = orderID;
+            this.data["data_order"] = data_order;
+
+            return this.HttpPost(this.url + "transaksi/change?api_token=" + MainForm.TOKEN, data);
+        }
     }
 }

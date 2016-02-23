@@ -25,6 +25,8 @@ namespace Printer_Pondok_Indah
         private int _qty, _stokAccept;
         public MainForm mainForm;
         public string orderID, nota, karyawan_id, karyawan;
+        private List<string> TProduk = new List<string>();
+        private List<string> TPlace = new List<string>();
 
         private void TransaksiChange_Load(object sender, EventArgs e)
         {
@@ -32,7 +34,6 @@ namespace Printer_Pondok_Indah
             dateTimePicker1.Enabled = false;
 
             txt_produks.AutoCompleteCustomSource = this.DataProduk();
-            txt_places.AutoCompleteCustomSource = this.DataPlace();
             txt_karyawan.AutoCompleteCustomSource = this.DataKaryawan();
 
             txt_kasir.Text = MainForm.USER["nama_karyawan"].ToString();
@@ -73,16 +74,6 @@ namespace Printer_Pondok_Indah
             return data;
         }
 
-        private AutoCompleteStringCollection DataPlace()
-        {
-            AutoCompleteStringCollection data = new AutoCompleteStringCollection();
-            foreach (DataRow row in DataPlaceObj.Rows)
-            {
-                data.Add(row["nama"].ToString() + "     #" + row["place_id"].ToString());
-            }
-            return data;
-        }
-
         private AutoCompleteStringCollection DataKaryawan()
         {
             AutoCompleteStringCollection data = new AutoCompleteStringCollection();
@@ -107,14 +98,23 @@ namespace Printer_Pondok_Indah
 
                     if (_stokAccept >= 1)
                     {
-                        dv = new DataView(DataProdukObj);
-                        dv.RowFilter = "produk_id = '" + _produk_id + "'";
+                        if (!TProduk.Contains(_produk_id))
+                        {
+                            TProduk.Add(_produk_id);
 
-                        dgv_produk.Rows.Add(dgv_produk.Rows.Count + 1, _produk_id, _produk_name, dv[0]["harga"].ToString(), _qty, (int.Parse(dv[0]["harga"].ToString()) * _qty));
+                            dv = new DataView(DataProdukObj);
+                            dv.RowFilter = "produk_id = '" + _produk_id + "'";
 
-                        qtyProduk.Clear();
-                        txt_produks.Clear();
-                        txt_produks.Focus();
+                            dgv_produk.Rows.Add(dgv_produk.Rows.Count + 1, _produk_id, _produk_name, dv[0]["harga"].ToString(), _qty, (int.Parse(dv[0]["harga"].ToString()) * _qty));
+
+                            qtyProduk.Clear();
+                            txt_produks.Clear();
+                            txt_produks.Focus();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Produk sudah dimasukkan !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
@@ -152,6 +152,7 @@ namespace Printer_Pondok_Indah
                         if (MessageBox.Show("Hapus " + _produk_name + " ??", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                                 == DialogResult.Yes)
                         {
+                            TProduk.Remove(dgv_produk[dgvproduk_produk_id.Index, e.RowIndex].Value.ToString());
                             dgv_produk.Rows.RemoveAt(e.RowIndex);
                         }
                     }
@@ -163,48 +164,39 @@ namespace Printer_Pondok_Indah
             }  
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnSaveTransaksi_Click(object sender, EventArgs e)
         {
             try
             {
-                if (txt_places.Text != "")
-                {
-                    _place_id = txt_places.Text.Split('#')[1].ToString();
-                    _place_name = txt_places.Text.Split('#')[0].ToString().Trim();
-
-                    dv = new DataView(DataPlaceObj);
-                    dv.RowFilter = "place_id = '" + _place_id + "'";
-
-                    dgv_place.Rows.Add(dgv_place.Rows.Count + 1, _place_id, _place_name, dv[0]["harga"].ToString());
-
-                    txt_places.Clear();
-                    txt_places.Focus();
-                }
-                else
-                {
-                    MessageBox.Show("Input belum lengkap !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
-        }
-
-        private void dgv_place_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (dgv_place.Rows.Count > 0)
-                {
-                    if (e.ColumnIndex == dgvplace_btnDelete.Index)
-                    {
-                        _place_name = dgv_place[dgvplace_nama_tempat.Index, e.RowIndex].Value.ToString();
-                        if (MessageBox.Show("Hapus " + _place_name + " ??", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                if (MessageBox.Show("Simpan Transaksi ??", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                                 == DialogResult.Yes)
+                {
+                    string _dProduk = "";
+                    if (dgv_produk.RowCount > 0)
+                    {
+                        // Generate Data Produk with Json
+                        _dProduk = "[";
+                        for (int i = 0; i < dgv_produk.RowCount; i++)
                         {
-                            dgv_place.Rows.RemoveAt(e.RowIndex);
+                            _dProduk += "{ \"id\": \"" +
+                                    dgv_produk[dgvproduk_produk_id.Index, i].Value.ToString() + "\", \"qty\": \"" +
+                                    dgv_produk[dgvproduk_qty.Index, i].Value.ToString() + "\", \"harga\": \"" +
+                                    dgv_produk[dgvproduk_harga.Index, i].Value.ToString() + "\" }";
+                            if ((i + 1) < dgv_produk.RowCount) { _dProduk += ","; }
+
                         }
+                        _dProduk += "]";
+                    }
+
+                    int res = int.Parse(Connection.GetInstance().ChangeTransaksi(this.orderID, _dProduk));
+
+                    if (res > 0)
+                    {
+                        this.mainForm.daftarTransaksiToolStripMenuItem_Click(null, null);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Terjadi Kesalahan !!", "Error !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -212,11 +204,6 @@ namespace Printer_Pondok_Indah
             {
                 MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } 
-        }
-
-        private void btnSaveTransaksi_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
