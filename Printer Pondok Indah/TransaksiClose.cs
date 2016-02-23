@@ -308,7 +308,7 @@ namespace Printer_Pondok_Indah
         {
             try
             {
-                if (txt_bayar.Text != "")
+                if (txt_bayar.Text != "" && txt_diskon.Text != "")
                 {
                     bool lanjut = true;
                     string customerID = "";
