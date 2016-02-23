@@ -32,6 +32,7 @@
             this.transaksiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.daftarTransaksiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.daftarProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ubahPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +41,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.transaksiToolStripMenuItem,
             this.daftarTransaksiToolStripMenuItem,
-            this.daftarProdukToolStripMenuItem});
+            this.daftarProdukToolStripMenuItem,
+            this.ubahPasswordToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(763, 24);
@@ -67,6 +69,13 @@
             this.daftarProdukToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.daftarProdukToolStripMenuItem.Text = "Daftar Produk";
             this.daftarProdukToolStripMenuItem.Click += new System.EventHandler(this.daftarProdukToolStripMenuItem_Click);
+            // 
+            // ubahPasswordToolStripMenuItem
+            // 
+            this.ubahPasswordToolStripMenuItem.Name = "ubahPasswordToolStripMenuItem";
+            this.ubahPasswordToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.ubahPasswordToolStripMenuItem.Text = "Ubah Password";
+            this.ubahPasswordToolStripMenuItem.Click += new System.EventHandler(this.ubahPasswordToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -95,5 +104,6 @@
         private System.Windows.Forms.ToolStripMenuItem transaksiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem daftarTransaksiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem daftarProdukToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ubahPasswordToolStripMenuItem;
     }
 }

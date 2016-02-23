@@ -30,6 +30,7 @@ namespace Printer_Pondok_Indah
         private ProdukTable produkTable;
         private TransaksiChange transaksiChange;
         private TransaksiClose transaksiClose;
+        private ChangePassword changePassword;
 
         public static string TOKEN;
         public static JObject SETTING, USER;
@@ -156,6 +157,23 @@ namespace Printer_Pondok_Indah
             transaksiClose.karyawan_id = karyawan_id;
             transaksiClose.karyawan = karyawan;
             transaksiClose.Show();
+        }
+
+        private void ubahPasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is ChangePassword)
+                {
+                    return;
+                }
+            }
+
+            CloseMdiForm();
+            changePassword = new ChangePassword();
+            changePassword.MdiParent = this;
+            changePassword.WindowState = FormWindowState.Maximized;
+            changePassword.Show();
         }
     }
 }

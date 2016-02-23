@@ -215,5 +215,14 @@ namespace Printer_Pondok_Indah
 
             return this.HttpPost(this.url + "transaksi/close?api_token=" + MainForm.TOKEN, data);
         }
+
+        public string ChangePassword(string oldPassword, string newPassword)
+        {
+            this.data = new NameValueCollection();
+            this.data["old_password"] = oldPassword;
+            this.data["password"] = newPassword;
+
+            return this.HttpPost(this.url + "user/change-password?api_token=" + MainForm.TOKEN, data);
+        }
     }
 }

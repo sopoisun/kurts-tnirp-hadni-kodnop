@@ -16,3 +16,4 @@ C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ProdukTable.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiChange.resources
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiClose.resources
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ChangePassword.resources

@@ -149,88 +149,100 @@ namespace Printer_Pondok_Indah
 
         void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            Font objFont = new Font("Courier New", 10F);//sets the font type and size
+            Font objFont = new Font("Courier New", 9F);//sets the font type and size
             Font fontHeader = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);//sets the font type and size
             //float fTopMargin = e.MarginBounds.Top;
             float fTopMargin = 0;
             float fLeftMargin = 5;//sets left margin
             float fRightMargin = e.MarginBounds.Right - 150;//sets right margin
+            string text = "";
 
             e.Graphics.DrawString(this.setting["title_faktur"].ToString(), fontHeader, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.7;//skip two lines
             e.Graphics.DrawString(this.setting["alamat_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
             e.Graphics.DrawString(this.setting["telp_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.3;//skip two lines
+            fTopMargin += objFont.GetHeight() * (float)2;//skip two lines
 
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            text = String.Format("{0} {1, 3} {2}", "Kasir", ":", this.dataBayar["kasir"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+            text = String.Format("{0} {1, 0} {2}", "Waiters", ":", this.dataBayar["waiters"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1;//skip two lines
+
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
-            e.Graphics.DrawString("Nota : " + this.nota + "\t\t" + DateTime.Now.Date.ToString("dd/MM/yyyy"), objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            this._txt = "Nota : "+this.nota;
+            this._length = this._txt.Length;
+
+            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, DateTime.Now.Date.ToString("dd/MM/yyyy"));
+
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.3;//skip two lines
 
-            /* produk */
-            string text = "";
+            /* produk */            
             foreach (DataRow row in dataProduk.Rows)
             {
                 text = string.Concat(row["nama_produk"].ToString());
                 e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
                 fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-                text = String.Format("   {0, -3} {1, 13} {2, 15}", row["qty"], row["harga"], row["subtotal"]);
+                text = String.Format("   {0, -3} {1, 11} {2, 12}", row["qty"], row["harga"], row["subtotal"]);
                 e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
                 fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
             }
             /* produk */
 
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
-            text = String.Format("          {0} {1, 7} {2, 12}", "Total", ":", this.dataBayar["total"]);
+            text = String.Format("       {0} {1, 7} {2, 10}", "Total", ":", this.dataBayar["total"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
             this._txt = " " + this.dataBayar["tax_pro"] + "%";
             this._length = 9 - this._txt.Length;
 
-            text = String.Format("          {0, -1} {1, " + this._length + "} {2, 12}", "Tax" + this._txt, ":", this.dataBayar["tax"]);
+            text = String.Format("       {0, -1} {1, " + this._length + "} {2, 10}", "Tax" + this._txt, ":", this.dataBayar["tax"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
             this._txt = " " + this.dataBayar["tax_bayar_pro"] + "%";
             this._length = 5 - this._txt.Length;
 
-            text = String.Format("          {0, -1} {1, " + this._length + "} {2, 12}", "Tax Byr" + this._txt, ":", this.dataBayar["tax_bayar"]);
+            text = String.Format("       {0, -1} {1, " + this._length + "} {2, 10}", "Tax Byr" + this._txt, ":", this.dataBayar["tax_bayar"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 6} {2, 12}", "Jumlah", ":", this.dataBayar["jumlah"]);
+            text = String.Format("       {0, -1} {1, 6} {2, 10}", "Jumlah", ":", this.dataBayar["jumlah"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 6} {2, 12}", "Diskon", ":", this.dataBayar["diskon"]);
+            text = String.Format("       {0, -1} {1, 6} {2, 10}", "Diskon", ":", this.dataBayar["diskon"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 8} {2, 12}", "Sisa", ":", this.dataBayar["sisa"]);
+            text = String.Format("       {0, -1} {1, 8} {2, 10}", "Sisa", ":", this.dataBayar["sisa"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 7} {2, 12}", "Bayar", ":", this.dataBayar["bayar"]);
+            text = String.Format("       {0, -1} {1, 7} {2, 10}", "Bayar", ":", this.dataBayar["bayar"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
 
-            text = String.Format("          {0, -1} {1, 5} {2, 12}", "Kembali", ":", this.dataBayar["kembali"]);
+            text = String.Format("       {0, -1} {1, 5} {2, 10}", "Kembali", ":", this.dataBayar["kembali"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
-            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+            fTopMargin += objFont.GetHeight() * (float)1;//skip two lines
 
-            e.Graphics.DrawString("------------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
-            e.Graphics.DrawString("TERIMA KASIH ATAS KUNJUNGAN ANDA", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            e.Graphics.DrawString("TRIMA KASIH ATAS KUNJUNGAN ANDA", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
             objFont.Dispose();
