@@ -70,12 +70,6 @@
     <Compile Include="ProdukTable.Designer.cs">
       <DependentUpon>ProdukTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="TransaksiList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TransaksiList.Designer.cs">
-      <DependentUpon>TransaksiList.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,12 +92,12 @@
       <DependentUpon>ProdukTable.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TransaksiForm.resx">
-      <DependentUpon>TransaksiForm.cs</DependentUpon>
+    <EmbeddedResource Include="TransaksiChange.resx">
+      <DependentUpon>TransaksiChange.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TransaksiList.resx">
-      <DependentUpon>TransaksiList.cs</DependentUpon>
+    <EmbeddedResource Include="TransaksiForm.resx">
+      <DependentUpon>TransaksiForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
@@ -135,6 +129,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TransaksiChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransaksiChange.Designer.cs">
+      <DependentUpon>TransaksiChange.cs</DependentUpon>
     </Compile>
     <Compile Include="TransaksiForm.cs">
       <SubType>Form</SubType>

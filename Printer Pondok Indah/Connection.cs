@@ -137,6 +137,12 @@ namespace Printer_Pondok_Indah
             return this.HttpGetSingle(this.url + "user?api_token=" + MainForm.TOKEN);
         }
 
+        public DataTable GetKaryawan()
+        {
+            DataSet ds = this.HttpGet(this.url + "karyawan?api_token=" + MainForm.TOKEN);
+            return ds.Tables[0];
+        }
+
         public DataTable GetProduk()
         {
             DataSet ds = this.HttpGet(this.url + "produk?api_token=" + MainForm.TOKEN);
@@ -153,6 +159,17 @@ namespace Printer_Pondok_Indah
         {
             string str = this.HttpGetOriginal(this.url + "produk/stok?api_token=" + MainForm.TOKEN + "&id=" + produk_id + "&qty=" + qty);
             return int.Parse(str);
+        }
+
+        public string OpenTransaksi(string tanggal, string data_order, string karyawan_id, string places)
+        {
+            this.data = new NameValueCollection();
+            this.data["tanggal"]        = tanggal;
+            this.data["data_order"]     = data_order;
+            this.data["karyawan_id"]    = karyawan_id;
+            this.data["places"]         = places;
+
+            return this.HttpPost(this.url + "transaksi/save?api_token=" + MainForm.TOKEN, data);
         }
     }
 }

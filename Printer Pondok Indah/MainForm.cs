@@ -18,19 +18,21 @@ namespace Printer_Pondok_Indah
             InitializeComponent();
 
             // Load Data
-            MainForm.SETTING = Connection.GetInstance().GetSetting();
-            MainForm.USER = Connection.GetInstance().GetUser();
-            MainForm.PRODUK = Connection.GetInstance().GetProduk();
-            MainForm.PLACE = Connection.GetInstance().GetPlace();
+            MainForm.SETTING    = Connection.GetInstance().GetSetting();
+            MainForm.USER       = Connection.GetInstance().GetUser();
+            MainForm.KARYAWAN   = Connection.GetInstance().GetKaryawan();
+            MainForm.PRODUK     = Connection.GetInstance().GetProduk();
+            MainForm.PLACE      = Connection.GetInstance().GetPlace();
         }
 
         private TransaksiForm transaksiForm;
         private TransaksiTable transaksiTable;
         private ProdukTable produkTable;
+        private TransaksiChange transaksiChange;
 
         public static string TOKEN;
         public static JObject SETTING, USER;
-        public static DataTable PRODUK, PLACE;
+        public static DataTable PRODUK, PLACE, KARYAWAN;
 
         private void CloseMdiForm()
         {
@@ -66,14 +68,16 @@ namespace Printer_Pondok_Indah
             transaksiForm.WindowState = FormWindowState.Maximized;
             transaksiForm.DataProdukObj = MainForm.PRODUK;
             transaksiForm.DataPlaceObj = MainForm.PLACE;
+            transaksiForm.DataKaryawanObj = MainForm.KARYAWAN;
+            transaksiForm.mainForm = this;
             transaksiForm.Show();
         }
 
-        private void daftarTransaksiToolStripMenuItem_Click(object sender, EventArgs e)
+        public void daftarTransaksiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form f in this.MdiChildren)
             {
-                if (f is TransaksiList)
+                if (f is TransaksiTable)
                 {
                     return;
                 }
@@ -84,6 +88,7 @@ namespace Printer_Pondok_Indah
             transaksiTable.MdiParent = this;
             transaksiTable.WindowState = FormWindowState.Maximized;
             transaksiTable.setting = MainForm.SETTING;
+            transaksiTable.mainForm = this;
             transaksiTable.Show();
         }
 
@@ -103,6 +108,31 @@ namespace Printer_Pondok_Indah
             produkTable.WindowState = FormWindowState.Maximized;
             produkTable.DataProduk = MainForm.PRODUK;
             produkTable.Show();
+        }
+
+        public void OpenChangeTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is TransaksiChange)
+                {
+                    return;
+                }
+            }
+
+            CloseMdiForm();
+            transaksiChange = new TransaksiChange();
+            transaksiChange.MdiParent = this;
+            transaksiChange.WindowState = FormWindowState.Maximized;
+            transaksiChange.DataProdukObj = MainForm.PRODUK;
+            transaksiChange.DataPlaceObj = MainForm.PLACE;
+            transaksiChange.DataKaryawanObj = MainForm.KARYAWAN;
+            transaksiChange.mainForm = this;
+            transaksiChange.orderID = orderID;
+            transaksiChange.nota = nota;
+            transaksiChange.karyawan_id = karyawan_id;
+            transaksiChange.karyawan = karyawan;
+            transaksiChange.Show();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Printer_Pondok_Indah
         private string nota = "", id = "", _txt = "";
         private int _length = 0;
         PrintDocument printdocument1 = new PrintDocument();
+        public MainForm mainForm;
 
         private void TransaksiTable_Load(object sender, EventArgs e)
         {
@@ -64,20 +65,24 @@ namespace Printer_Pondok_Indah
                 dataGridView1.Columns[4].HeaderText = "Karyawan";
                 dataGridView1.Columns[4].Width = 230;
                 dataGridView1.Columns[4].Name = "karyawan";
+                dataGridView1.Columns[5].HeaderText = "Karyawan ID";
+                dataGridView1.Columns[5].Width = 130;
+                dataGridView1.Columns[5].Name = "karyawan_id";
+                dataGridView1.Columns[5].Visible = false;
 
                 btnDetail = new DataGridViewButtonColumn();
                 btnDetail.Name = "btn_detail";
                 btnDetail.HeaderText = "Action";
-                btnDetail.Text = "Detail";
-                btnDetail.Width = 80;
+                btnDetail.Text = "Change/Detail";
+                btnDetail.Width = 100;
                 btnDetail.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(btnDetail);
 
                 btnPrint = new DataGridViewButtonColumn();
                 btnPrint.Name = "btn_print";
                 btnPrint.HeaderText = "Action";
-                btnPrint.Text = "Print";
-                btnPrint.Width = 80;
+                btnPrint.Text = "Close/Print";
+                btnPrint.Width = 100;
                 btnPrint.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(btnPrint);
             }
@@ -89,7 +94,7 @@ namespace Printer_Pondok_Indah
             {
                 this.nota = dataGridView1[dataGridView1.Columns["nota"].Index, e.RowIndex].Value.ToString();
                 this.id = dataGridView1[dataGridView1.Columns["id"].Index, e.RowIndex].Value.ToString();
-                string status = dataGridView1[dataGridView1.Columns["status"].Index, e.RowIndex].Value.ToString();
+                string status = dataGridView1[dataGridView1.Columns["status"].Index, e.RowIndex].Value.ToString();                
 
                 if (e.ColumnIndex == dataGridView1.Columns["btn_print"].Index && e.RowIndex >= 0)
                 {
@@ -113,11 +118,21 @@ namespace Printer_Pondok_Indah
 
                 if (e.ColumnIndex == dataGridView1.Columns["btn_detail"].Index && e.RowIndex >= 0)
                 {
-                    detail = new Detail();
-                    detail.id = this.id;
-                    detail.nota = this.nota;
-                    detail.status = status;
-                    detail.ShowDialog();
+                    if (status == "Closed")
+                    {
+                        detail = new Detail();
+                        detail.id = this.id;
+                        detail.nota = this.nota;
+                        detail.status = status;
+                        detail.ShowDialog();
+                    }
+                    else
+                    {
+                        string karyawan_id = dataGridView1[dataGridView1.Columns["karyawan_id"].Index, e.RowIndex].Value.ToString();
+                        string nama_karyawan = dataGridView1[dataGridView1.Columns["karyawan"].Index, e.RowIndex].Value.ToString();
+
+                        this.mainForm.OpenChangeTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
+                    }
                 }
             }
             catch (Exception ex)
