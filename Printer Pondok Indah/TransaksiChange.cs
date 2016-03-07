@@ -24,7 +24,7 @@ namespace Printer_Pondok_Indah
         private string _produk_id, _produk_name, _place_id, _place_name;
         private int _qty, _stokAccept;
         public MainForm mainForm;
-        public string orderID, nota, karyawan_id, karyawan;
+        public string orderID, nota, karyawan_id, karyawan, tanggal;
         private List<string> TProduk = new List<string>();
         private List<string> TPlace = new List<string>();
 
@@ -32,6 +32,7 @@ namespace Printer_Pondok_Indah
         {
             txt_kasir.Enabled = false;
             dateTimePicker1.Enabled = false;
+            dateTimePicker1.Value = DateTime.Parse(tanggal);
 
             txt_produks.AutoCompleteCustomSource = this.DataProduk();
             txt_karyawan.AutoCompleteCustomSource = this.DataKaryawan();

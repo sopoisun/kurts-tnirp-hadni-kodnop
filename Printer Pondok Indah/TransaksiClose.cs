@@ -19,7 +19,7 @@ namespace Printer_Pondok_Indah
 
         public DataTable oldData, DataBank, DataTax, DataCustomerObj;
         public MainForm mainForm;
-        public string orderID, nota, karyawan_id, karyawan, selectedCmb;
+        public string orderID, nota, karyawan_id, karyawan, selectedCmb, tanggal;
         private int tempSplit1, tempSplit2, tax_procentage = 0, tax_bayar_procentage = 0;
         private DataView dvTax, dvBank, dvCustomer;
 
@@ -51,6 +51,7 @@ namespace Printer_Pondok_Indah
                 txt_karyawan.Text = karyawan;
                 txt_karyawan.Enabled = false;
                 this.Text = "Close Transaksi #" + this.nota;
+                dateTimePicker1.Value = DateTime.Parse(tanggal);
 
                 // Produk yang sudah dipesan ( Old Data )
                 oldData = Connection.GetInstance().GetDetail(this.orderID);

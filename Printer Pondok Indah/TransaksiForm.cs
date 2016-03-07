@@ -30,7 +30,7 @@ namespace Printer_Pondok_Indah
         private void TransaksiForm_Load(object sender, EventArgs e)
         {
             txt_kasir.Enabled = false;
-            dateTimePicker1.Enabled = false;
+            //dateTimePicker1.Enabled = false;
 
             txt_produks.AutoCompleteCustomSource = this.DataProduk();
             txt_places.AutoCompleteCustomSource = this.DataPlace();

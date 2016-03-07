@@ -277,10 +277,10 @@
             // lbl_tax_bayar
             // 
             this.lbl_tax_bayar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_tax_bayar.Location = new System.Drawing.Point(512, 108);
+            this.lbl_tax_bayar.Location = new System.Drawing.Point(496, 108);
             this.lbl_tax_bayar.Name = "lbl_tax_bayar";
             this.lbl_tax_bayar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lbl_tax_bayar.Size = new System.Drawing.Size(82, 14);
+            this.lbl_tax_bayar.Size = new System.Drawing.Size(98, 21);
             this.lbl_tax_bayar.TabIndex = 36;
             this.lbl_tax_bayar.Text = "Tax Bayar";
             this.lbl_tax_bayar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

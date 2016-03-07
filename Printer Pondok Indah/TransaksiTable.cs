@@ -113,7 +113,7 @@ namespace Printer_Pondok_Indah
                     }
                     else
                     {
-                        this.mainForm.CloseTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
+                        this.mainForm.CloseTransaksi(this.id, this.nota, karyawan_id, nama_karyawan, tanggal.Value.ToString("yyyy-MM-dd"));
                     }
                 }
                 else if (e.ColumnIndex == dataGridView1.Columns["btn_detail"].Index && e.RowIndex >= 0)
@@ -128,7 +128,7 @@ namespace Printer_Pondok_Indah
                     }
                     else
                     {
-                        this.mainForm.ChangeTransaksi(this.id, this.nota, karyawan_id, nama_karyawan);
+                        this.mainForm.ChangeTransaksi(this.id, this.nota, karyawan_id, nama_karyawan, tanggal.Value.ToString("yyyy-MM-dd"));
                     }
                 }
             }

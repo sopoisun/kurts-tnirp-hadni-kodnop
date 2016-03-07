@@ -112,7 +112,7 @@ namespace Printer_Pondok_Indah
             produkTable.Show();
         }
 
-        public void ChangeTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
+        public void ChangeTransaksi(string orderID, string nota, string karyawan_id, string karyawan, string tanggal)
         {
             foreach (Form f in this.MdiChildren)
             {
@@ -134,10 +134,11 @@ namespace Printer_Pondok_Indah
             transaksiChange.nota = nota;
             transaksiChange.karyawan_id = karyawan_id;
             transaksiChange.karyawan = karyawan;
+            transaksiChange.tanggal = tanggal;
             transaksiChange.Show();
         }
 
-        public void CloseTransaksi(string orderID, string nota, string karyawan_id, string karyawan)
+        public void CloseTransaksi(string orderID, string nota, string karyawan_id, string karyawan, string tanggal)
         {
             foreach (Form f in this.MdiChildren)
             {
@@ -156,6 +157,7 @@ namespace Printer_Pondok_Indah
             transaksiClose.nota = nota;
             transaksiClose.karyawan_id = karyawan_id;
             transaksiClose.karyawan = karyawan;
+            transaksiClose.tanggal = tanggal;
             transaksiClose.Show();
         }
 
