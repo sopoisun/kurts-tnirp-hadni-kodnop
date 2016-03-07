@@ -199,11 +199,12 @@ namespace Printer_Pondok_Indah
             return this.HttpPost(this.url + "transaksi/change?api_token=" + MainForm.TOKEN, data);
         }
 
-        public string CloseTransaksi(string orderID, string tax_id, string tax_procentage, string diskon, string bayar, string type_bayar,
+        public string CloseTransaksi(string orderID, string service_cost, string tax_id, string tax_procentage, string diskon, string bayar, string type_bayar,
             string bank_id, string tax_bayar_procentage, string customer_id)
         {
             this.data = new NameValueCollection();
             this.data["id"] = orderID;
+            this.data["service_cost"] = service_cost;
             this.data["tax_id"] = tax_id;
             this.data["tax_procentage"] = tax_procentage;
             this.data["diskon"] = diskon;

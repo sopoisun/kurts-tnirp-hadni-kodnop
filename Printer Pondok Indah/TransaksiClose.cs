@@ -41,6 +41,7 @@ namespace Printer_Pondok_Indah
                 txt_karyawan.Enabled = false;
                 txt_customer.Enabled = false;
                 txt_total.ReadOnly = true;
+                txt_service_cost.ReadOnly = true;
                 txt_tax.ReadOnly = true;
                 txt_tax_bayar.ReadOnly = true;
                 txt_total_akhir.ReadOnly = true;
@@ -81,6 +82,7 @@ namespace Printer_Pondok_Indah
                 dataGridView1.Columns[4].Width = 150;
                 dataGridView1.Columns[4].Name = "subtotal";
 
+                cmb_service_cost.SelectedIndex = 0;
                 cmb_type_bayar.SelectedIndex = 0;
 
                 DataTax = Connection.GetInstance().GetTax();
@@ -246,6 +248,8 @@ namespace Printer_Pondok_Indah
             try
             {
                 double total = int.Parse(txt_total.Text);
+                double service_cost = int.Parse(txt_service_cost.Text);
+                total += service_cost;
                 double tax = Math.Round(total * (double.Parse(this.tax_procentage.ToString()) / 100));
                 double tax_bayar = Math.Round((total + tax) * (double.Parse(this.tax_bayar_procentage.ToString()) / 100));
                 double total_akhir = total + tax + tax_bayar;
@@ -342,7 +346,7 @@ namespace Printer_Pondok_Indah
                             int diskon = int.Parse(txt_diskon.Text);
                             int bayar = int.Parse(txt_bayar.Text);
 
-                            int res = int.Parse(Connection.GetInstance().CloseTransaksi(this.orderID, cmb_type_tax.SelectedValue.ToString(), this.tax_procentage.ToString(),
+                            int res = int.Parse(Connection.GetInstance().CloseTransaksi(this.orderID, txt_service_cost.Text,cmb_type_tax.SelectedValue.ToString(), this.tax_procentage.ToString(),
                                 diskon.ToString(), bayar.ToString(), cmb_type_bayar.SelectedItem.ToString().ToLower().Replace(" ", "_"), cmb_bank.SelectedValue.ToString(), this.tax_bayar_procentage.ToString(),
                                 customerID));
 
@@ -362,6 +366,27 @@ namespace Printer_Pondok_Indah
                 {
                     MessageBox.Show("Input belum lengkap", "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmb_service_cost_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmb_service_cost.SelectedItem.ToString() == "Ya")
+                {
+                    txt_service_cost.Text = MainForm.SETTING["service_cost"].ToString();
+                }
+                else
+                {
+                    txt_service_cost.Text = "0";
+                }
+
+                HitungTotalAkhir();
             }
             catch (Exception ex)
             {
