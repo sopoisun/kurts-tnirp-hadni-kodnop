@@ -54,7 +54,7 @@ namespace Printer_Pondok_Indah
             AutoCompleteStringCollection data = new AutoCompleteStringCollection();
             foreach (DataRow row in DataPlaceObj.Rows)
             {
-                data.Add(row["nama"].ToString() + "     #" + row["place_id"].ToString());
+                data.Add(row["nama"].ToString() + " - "+row["kategori"]+"    #" + row["place_id"].ToString());
             }
             return data;
         }
