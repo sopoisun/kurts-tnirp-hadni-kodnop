@@ -17,9 +17,9 @@ namespace Printer_Pondok_Indah
             InitializeComponent();
         }
 
-        public DataTable oldData, DataBank, DataTax, DataCustomerObj;
+        public DataTable oldData, DataBank, DataBankTax, DataTax, DataCustomerObj;
         public MainForm mainForm;
-        public string orderID, nota, karyawan_id, karyawan, selectedCmb, tanggal;
+        public string orderID, nota, karyawan_id, karyawan, selectedCmb, tanggal, bankTaxType;
         private int tempSplit1, tempSplit2, tax_procentage = 0, tax_bayar_procentage = 0;
         private DataView dvTax, dvBank, dvCustomer;
 
@@ -169,10 +169,9 @@ namespace Printer_Pondok_Indah
         {
             try
             {
-                if (cmb_type_bayar.SelectedItem.ToString() == "Credit Card")
+                if (cmb_type_bayar.SelectedItem.ToString() != "Tunai")
                 {
                     selectedCmb = cmb_bank.SelectedValue.ToString();
-
                     if (selectedCmb.IndexOf('[') >= 0)
                     {
                         tempSplit1 = selectedCmb.IndexOf('[');
@@ -183,8 +182,9 @@ namespace Printer_Pondok_Indah
 
                     dvBank = new DataView(DataBank);
                     dvBank.RowFilter = "bank_id = '" + selectedCmb + "'";
-                    lbl_tax_bayar.Text = "Tax Bayar " + dvBank[0]["credit_card_tax"].ToString() + "%";
-                    this.tax_bayar_procentage = int.Parse(dvBank[0]["credit_card_tax"].ToString());
+                    bankTaxType = "tax_" + cmb_type_bayar.SelectedItem.ToString().ToLower().Replace(" ", "_");
+                    lbl_tax_bayar.Text = "Tax Bayar " + dvBank[0][bankTaxType].ToString() + "%";
+                    this.tax_bayar_procentage = int.Parse(dvBank[0][bankTaxType].ToString());
                 }
                 else
                 {

@@ -155,6 +155,12 @@ namespace Printer_Pondok_Indah
             return ds.Tables[0];
         }
 
+        public DataTable GetBankTax()
+        {
+            DataSet ds = this.HttpGet(this.url + "bank/tax?api_token=" + MainForm.TOKEN);
+            return ds.Tables[0];
+        }
+
         public DataTable GetCustomer()
         {
             DataSet ds = this.HttpGet(this.url + "customer?api_token=" + MainForm.TOKEN);
