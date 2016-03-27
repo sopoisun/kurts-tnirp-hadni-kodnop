@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Printing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -16,6 +17,7 @@ namespace Printer_Pondok_Indah
         public MainForm()
         {
             InitializeComponent();
+            printdocument1.PrintPage += DoPrintStruk;
 
             // Load Data
             MainForm.SETTING    = Connection.GetInstance().GetSetting();
@@ -31,10 +33,145 @@ namespace Printer_Pondok_Indah
         private TransaksiChange transaksiChange;
         private TransaksiClose transaksiClose;
         private ChangePassword changePassword;
+        // for print nota
+        private PrintDocument printdocument1 = new PrintDocument();
+        private DataTable dataProduk;
+        private JObject dataBayar;
+        private string nota = "", _txt = "";
+        private int _length = 0;
 
         public static string TOKEN;
         public static JObject SETTING, USER;
         public static DataTable PRODUK, PLACE, KARYAWAN;
+
+        /* Print Action */
+        public void PrintStruk(string orderId)
+        {
+            this.dataProduk = Connection.GetInstance().GetDetail(orderId);
+            this.dataBayar = Connection.GetInstance().GetBayar(orderId);
+
+            using (PrintDialog pd = new PrintDialog())
+            {
+                printdocument1.PrinterSettings = pd.PrinterSettings;
+                printdocument1.Print();
+            }
+        }
+
+        public void PrintStruk(DataTable _dataProduk, JObject _dataBayar)
+        {
+            this.dataProduk = _dataProduk;
+            this.dataBayar = _dataBayar;
+
+            using (PrintDialog pd = new PrintDialog())
+            {
+                printdocument1.PrinterSettings = pd.PrinterSettings;
+                printdocument1.Print();
+            }
+        }
+
+        private void DoPrintStruk(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Font objFont = new Font("Courier New", 9F);//sets the font type and size
+            Font fontHeader = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);//sets the font type and size
+            //float fTopMargin = e.MarginBounds.Top;
+            float fTopMargin = 0;
+            float fLeftMargin = 5;//sets left margin
+            float fRightMargin = e.MarginBounds.Right - 150;//sets right margin
+            string text = "";
+
+            e.Graphics.DrawString(MainForm.SETTING["title_faktur"].ToString(), fontHeader, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.7;//skip two lines
+            e.Graphics.DrawString(MainForm.SETTING["alamat_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+            e.Graphics.DrawString(MainForm.SETTING["telp_faktur"].ToString(), objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)2;//skip two lines
+
+            text = String.Format("{0} {1, 3} {2}", "Kasir", ":", this.dataBayar["kasir"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+            text = String.Format("{0} {1, 0} {2}", "Waiters", ":", this.dataBayar["waiters"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1;//skip two lines
+
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * 1;//skip two lines
+
+            this._txt = "Nota : " + this.nota;
+            this._length = this._txt.Length;
+
+            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, DateTime.Now.Date.ToString("dd/MM/yyyy"));
+
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * 1;//skip two lines
+
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.3;//skip two lines
+
+            /* produk */
+            foreach (DataRow row in dataProduk.Rows)
+            {
+                text = string.Concat(row["nama_produk"].ToString());
+                e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+                fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+                text = String.Format("   {0, -3} {1, 11} {2, 12}", row["qty"], row["harga"], row["subtotal"]);
+                e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+                fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+            }
+            /* produk */
+
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * 1;//skip two lines
+
+            text = String.Format("{0} {1, 7} {2, 17}", "Total", ":", this.dataBayar["total"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            this._txt = " " + this.dataBayar["tax_pro"] + "%";
+            this._length = 9 - this._txt.Length;
+
+            text = String.Format("{0, -1} {1, " + this._length + "} {2, 17}", "Tax" + this._txt, ":", this.dataBayar["tax"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            this._txt = " " + this.dataBayar["tax_bayar_pro"] + "%";
+            this._length = 5 - this._txt.Length;
+
+            text = String.Format("{0, -1} {1, " + this._length + "} {2, 17}", "Tax Byr" + this._txt, ":", this.dataBayar["tax_bayar"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            text = String.Format("{0, -1} {1, 6} {2, 17}", "Jumlah", ":", this.dataBayar["jumlah"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            text = String.Format("{0, -1} {1, 6} {2, 17}", "Diskon", ":", this.dataBayar["diskon"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            text = String.Format("{0, -1} {1, 8} {2, 17}", "Sisa", ":", this.dataBayar["sisa"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            text = String.Format("{0, -1} {1, 7} {2, 17}", "Bayar", ":", this.dataBayar["bayar"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+
+            text = String.Format("{0, -1} {1, 5} {2, 17}", "Kembali", ":", this.dataBayar["kembali"]);
+            e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * (float)1;//skip two lines
+
+            e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * 1;//skip two lines
+
+            e.Graphics.DrawString("TRIMA KASIH ATAS KUNJUNGAN ANDA", objFont, Brushes.Black, fLeftMargin, fTopMargin);
+            fTopMargin += objFont.GetHeight() * 1;//skip two lines
+
+            objFont.Dispose();
+
+            e.HasMorePages = false;
+        }
+        /* End Print Action */
 
         private void CloseMdiForm()
         {

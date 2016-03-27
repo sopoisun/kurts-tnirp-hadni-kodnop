@@ -56,7 +56,6 @@
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(206, 20);
             this.txt_username.TabIndex = 1;
-            this.txt_username.Text = "rizalafani";
             this.txt_username.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_username_KeyPress);
             // 
             // label2
@@ -74,7 +73,6 @@
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(206, 20);
             this.txt_password.TabIndex = 3;
-            this.txt_password.Text = "administrator";
             this.txt_password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_password_KeyPress);
             // 
             // button1

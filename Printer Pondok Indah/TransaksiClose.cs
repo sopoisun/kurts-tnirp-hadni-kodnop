@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Printer_Pondok_Indah
 {
@@ -352,7 +354,11 @@ namespace Printer_Pondok_Indah
 
                             if (res > 0)
                             {
-                                MessageBox.Show("Sukses Close Transaksi.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                if (MessageBox.Show("Sukses Close Transaksi.\nPrint Nota Transaksi ??", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    this.mainForm.PrintStruk(this.dataProduk(), this.dataBayar());
+                                }
+
                                 this.mainForm.daftarTransaksiToolStripMenuItem_Click(null, null);
                             }
                             else
@@ -371,6 +377,47 @@ namespace Printer_Pondok_Indah
             {
                 MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private DataTable dataProduk()
+        {
+            DataTable dataProduk = oldData.Copy();
+
+            DataRow newRow = dataProduk.NewRow();
+            newRow["no"] = dataProduk.Rows.Count + 1;
+            newRow["nama_produk"] = "Service";
+            newRow["harga"] = String.Format("{0:C}", int.Parse(txt_service_cost.Text)).Substring(2);
+            newRow["qty"] = 1;
+            newRow["subtotal"] = String.Format("{0:C}", int.Parse(txt_service_cost.Text)).Substring(2);
+
+            dataProduk.Rows.Add(newRow);
+
+            return dataProduk;
+        }
+
+        private JObject dataBayar()
+        {
+            int total = 0;
+            foreach (DataRow row in dataProduk().Rows)
+            {
+                total += int.Parse(row["subtotal"].ToString().Replace(".", ""));
+            }
+
+            JObject dataBayar = new JObject();
+            dataBayar["kasir"] = txt_kasir.Text;
+            dataBayar["waiters"] = this.karyawan;
+            dataBayar["total"] = String.Format("{0:C}", total).Substring(2);
+            dataBayar["tax_pro"] = this.tax_procentage;
+            dataBayar["tax"] = String.Format("{0:C}", int.Parse(txt_tax.Text)).Substring(2);
+            dataBayar["tax_bayar_pro"] = this.tax_bayar_procentage;
+            dataBayar["tax_bayar"] = String.Format("{0:C}", int.Parse(txt_tax_bayar.Text)).Substring(2);
+            dataBayar["jumlah"] = String.Format("{0:C}", int.Parse(txt_total_akhir.Text)).Substring(2);
+            dataBayar["diskon"] = String.Format("{0:C}", int.Parse(txt_diskon.Text)).Substring(2);
+            dataBayar["sisa"] = String.Format("{0:C}", int.Parse(txt_jumlah.Text)).Substring(2);
+            dataBayar["bayar"] = String.Format("{0:C}", int.Parse(txt_bayar.Text)).Substring(2);
+            dataBayar["kembali"] = String.Format("{0:C}", int.Parse(txt_kembali.Text)).Substring(2);            
+
+            return dataBayar;
         }
 
         private void cmb_service_cost_SelectedIndexChanged(object sender, EventArgs e)
