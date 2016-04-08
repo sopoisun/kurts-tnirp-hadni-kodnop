@@ -26,6 +26,7 @@ namespace Printer_Pondok_Indah
         public MainForm mainForm;
         private List<string> TProduk = new List<string>();
         private List<string> TPlace = new List<string>();
+        private ProdukComposition produkComposition;
 
         private void TransaksiForm_Load(object sender, EventArgs e)
         {
@@ -265,6 +266,32 @@ namespace Printer_Pondok_Indah
             {
                 MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }   
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_produks.Text != "" && qtyProduk.Text != "")
+                {
+                    _produk_id = txt_produks.Text.Split('#')[1].ToString();
+                    _produk_name = txt_produks.Text.Split('#')[0].ToString().Trim();
+                    _qty = int.Parse(qtyProduk.Text);
+
+                    produkComposition = new ProdukComposition();
+                    produkComposition.namaProduk = _produk_name;
+                    produkComposition.idProduk = _produk_id;
+                    produkComposition.QtyReq = _qty;
+                    produkComposition.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Input belum lengkap !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Warning !!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }   
     }
 }

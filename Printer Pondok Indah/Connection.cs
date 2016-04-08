@@ -179,6 +179,12 @@ namespace Printer_Pondok_Indah
             return ds.Tables[0];
         }
 
+        public DataTable GetProdukComposition(string id, int qty)
+        {
+            DataSet ds = this.HttpGet(this.url + "produk/composite?api_token=" + MainForm.TOKEN + "&id=" + id+"&qty=" + qty);
+            return ds.Tables[0];
+        }
+
         public int CheckStok(string produk_id, int qty)
         {
             string str = this.HttpGetOriginal(this.url + "produk/stok?api_token=" + MainForm.TOKEN + "&id=" + produk_id + "&qty=" + qty);

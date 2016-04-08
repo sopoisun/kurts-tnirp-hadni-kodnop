@@ -103,7 +103,7 @@ namespace Printer_Pondok_Indah
                         if (MessageBox.Show("Print nota " + nota + " ini ?", "Question",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            this.mainForm.PrintStruk(this.id);
+                            this.mainForm.PrintStruk(this.id, this.nota);
                         }
                     }
                     else

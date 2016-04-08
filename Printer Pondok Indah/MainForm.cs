@@ -45,8 +45,9 @@ namespace Printer_Pondok_Indah
         public static DataTable PRODUK, PLACE, KARYAWAN;
 
         /* Print Action */
-        public void PrintStruk(string orderId)
+        public void PrintStruk(string orderId, string _nota)
         {
+            this.nota = _nota;
             this.dataProduk = Connection.GetInstance().GetDetail(orderId);
             this.dataBayar = Connection.GetInstance().GetBayar(orderId);
 
@@ -57,8 +58,9 @@ namespace Printer_Pondok_Indah
             }
         }
 
-        public void PrintStruk(DataTable _dataProduk, JObject _dataBayar)
+        public void PrintStruk(string _nota, DataTable _dataProduk, JObject _dataBayar)
         {
+            this.nota = _nota;
             this.dataProduk = _dataProduk;
             this.dataBayar = _dataBayar;
 

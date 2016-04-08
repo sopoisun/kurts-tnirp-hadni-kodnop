@@ -59,6 +59,7 @@
             this.btnSaveTransaksi = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_karyawan = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_produk)).BeginInit();
             this.group_produk.SuspendLayout();
             this.group_place.SuspendLayout();
@@ -173,6 +174,7 @@
             // 
             this.group_produk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.group_produk.Controls.Add(this.button3);
             this.group_produk.Controls.Add(this.qtyProduk);
             this.group_produk.Controls.Add(this.label5);
             this.group_produk.Controls.Add(this.button1);
@@ -358,6 +360,16 @@
             this.txt_karyawan.Size = new System.Drawing.Size(231, 20);
             this.txt_karyawan.TabIndex = 9;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(674, 22);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Cek Stok";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // TransaksiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,5 +431,6 @@
         private System.Windows.Forms.Button btnSaveTransaksi;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_karyawan;
+        private System.Windows.Forms.Button button3;
     }
 }

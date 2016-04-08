@@ -17,3 +17,4 @@ C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.csproj.GenerateResource.Cache
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.exe
 C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.pdb
+C:\Users\Rizal Afani\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.ProdukComposition.resources

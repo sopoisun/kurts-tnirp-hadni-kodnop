@@ -356,7 +356,7 @@ namespace Printer_Pondok_Indah
                             {
                                 if (MessageBox.Show("Sukses Close Transaksi.\nPrint Nota Transaksi ??", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
-                                    this.mainForm.PrintStruk(this.dataProduk(), this.dataBayar());
+                                    this.mainForm.PrintStruk(this.nota, this.dataProduk(), this.dataBayar());
                                 }
 
                                 this.mainForm.daftarTransaksiToolStripMenuItem_Click(null, null);
