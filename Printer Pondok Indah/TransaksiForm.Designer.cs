@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_kasir = new System.Windows.Forms.TextBox();
             this.group_produk = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.qtyProduk = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.btnSaveTransaksi = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_karyawan = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_produk)).BeginInit();
             this.group_produk.SuspendLayout();
             this.group_place.SuspendLayout();
@@ -187,6 +187,16 @@
             this.group_produk.TabIndex = 5;
             this.group_produk.TabStop = false;
             this.group_produk.Text = "Daftar Produk Yang Dibeli";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(674, 22);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(117, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Cek Komposisi";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // qtyProduk
             // 
@@ -359,16 +369,6 @@
             this.txt_karyawan.Name = "txt_karyawan";
             this.txt_karyawan.Size = new System.Drawing.Size(231, 20);
             this.txt_karyawan.TabIndex = 9;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(674, 22);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Cek Stok";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // TransaksiForm
             // 
