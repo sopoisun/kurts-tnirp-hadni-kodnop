@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.IO;
@@ -27,6 +28,8 @@ namespace Printer_Pondok_Indah
         private List<string> TProduk = new List<string>();
         private List<string> TPlace = new List<string>();
         private ProdukComposition produkComposition;
+        private Regex regex = new Regex(@"\d+");
+        private Match match;
 
         private void TransaksiForm_Load(object sender, EventArgs e)
         {
@@ -80,31 +83,41 @@ namespace Printer_Pondok_Indah
                     _produk_name = txt_produks.Text.Split('#')[0].ToString().Trim();
                     _qty = int.Parse(qtyProduk.Text);
 
-                    _stokAccept = Connection.GetInstance().CheckStok(_produk_id, _qty);
+                    this.match = regex.Match(_produk_id);
 
-                    if (_stokAccept >= 1)
+                    if (this.match.Success)
                     {
-                        if (!TProduk.Contains(_produk_id))
+                        _produk_id = this.match.Value.ToString();
+                        _stokAccept = Connection.GetInstance().CheckStok(_produk_id, _qty);
+
+                        if (_stokAccept >= 1)
                         {
-                            TProduk.Add(_produk_id);
+                            if (!TProduk.Contains(_produk_id))
+                            {
+                                TProduk.Add(_produk_id);
 
-                            dv = new DataView(DataProdukObj);
-                            dv.RowFilter = "produk_id = '" + _produk_id + "'";
+                                dv = new DataView(DataProdukObj);
+                                dv.RowFilter = "produk_id = '" + _produk_id + "'";
 
-                            dgv_produk.Rows.Add(dgv_produk.Rows.Count + 1, _produk_id, _produk_name, dv[0]["harga"].ToString(), _qty, (int.Parse(dv[0]["harga"].ToString()) * _qty));
+                                dgv_produk.Rows.Add(dgv_produk.Rows.Count + 1, _produk_id, _produk_name, dv[0]["harga"].ToString(), _qty, (int.Parse(dv[0]["harga"].ToString()) * _qty));
 
-                            qtyProduk.Clear();
-                            txt_produks.Clear();
-                            txt_produks.Focus();
+                                qtyProduk.Clear();
+                                txt_produks.Clear();
+                                txt_produks.Focus();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Produk sudah dimasukkan !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Produk sudah dimasukkan !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Stok tidak cukup !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Stok tidak cukup !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Mohon periksa input produk, karena \nterselip karakter asing !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
@@ -159,21 +172,31 @@ namespace Printer_Pondok_Indah
                     _place_id = txt_places.Text.Split('#')[1].ToString();
                     _place_name = txt_places.Text.Split('#')[0].ToString().Trim();
 
-                    if (!TPlace.Contains(_place_id))
+                    this.match = regex.Match(_place_id);
+
+                    if (this.match.Success)
                     {
-                        TPlace.Add(_place_id);
+                        _place_id = this.match.Value.ToString();
+                        if (!TPlace.Contains(_place_id))
+                        {
+                            TPlace.Add(_place_id);
 
-                        dv = new DataView(DataPlaceObj);
-                        dv.RowFilter = "place_id = '" + _place_id + "'";
+                            dv = new DataView(DataPlaceObj);
+                            dv.RowFilter = "place_id = '" + _place_id + "'";
 
-                        dgv_place.Rows.Add(dgv_place.Rows.Count + 1, _place_id, _place_name, dv[0]["harga"].ToString());
+                            dgv_place.Rows.Add(dgv_place.Rows.Count + 1, _place_id, _place_name, dv[0]["harga"].ToString());
 
-                        txt_places.Clear();
-                        txt_places.Focus();
+                            txt_places.Clear();
+                            txt_places.Focus();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tempat sudah dimasukkan !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Tempat sudah dimasukkan !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Mohon periksa input tempat, karena \nterselip karakter asing !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
@@ -243,6 +266,8 @@ namespace Printer_Pondok_Indah
                         }
 
                         string _karyawan_id = txt_karyawan.Text.ToString().Split('#')[1]; // waiters
+                        this.match = regex.Match(_karyawan_id);
+                        _karyawan_id = this.match.Value.ToString();
 
                         int res = int.Parse(Connection.GetInstance().OpenTransaksi(dateTimePicker1.Value.ToString("yyyy-MM-dd"), _dProduk, _karyawan_id, _dPlace));
 
