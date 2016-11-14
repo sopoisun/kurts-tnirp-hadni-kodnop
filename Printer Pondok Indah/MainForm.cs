@@ -93,6 +93,14 @@ namespace Printer_Pondok_Indah
             fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
             text = String.Format("{0} {1, 0} {2}", "Waiters", ":", this.dataBayar["waiters"]);
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
+
+            if (this.dataBayar["customer"].ToString() != "")
+            {
+                fTopMargin += objFont.GetHeight() * (float)1.5;//skip two lines
+                text = String.Format("{0} {1, 2} {2}", "Member", ":", this.dataBayar["customer"]);
+                e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);                
+            }
+
             fTopMargin += objFont.GetHeight() * (float)1;//skip two lines
 
             e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);

@@ -49,23 +49,26 @@ namespace Printer_Pondok_Indah
             // Produk yang sudah dipesan ( Old Data )
             oldData = Connection.GetInstance().GetDetail(this.orderID);
 
-            dataGridView1.Columns.Clear();
+            if (oldData.Rows.Count > 0)
+            {
+                dataGridView1.Columns.Clear();
+                dataGridView1.DataSource = oldData;
 
-            dataGridView1.DataSource = oldData;
-            dataGridView1.Columns[0].HeaderText = "No";
-            dataGridView1.Columns[0].Width = 40;
-            dataGridView1.Columns[1].HeaderText = "Nama Produk";
-            dataGridView1.Columns[1].Width = 350;
-            dataGridView1.Columns[1].Name = "nama_produk";
-            dataGridView1.Columns[2].HeaderText = "Harga";
-            dataGridView1.Columns[2].Width = 150;
-            dataGridView1.Columns[2].Name = "harga";
-            dataGridView1.Columns[3].HeaderText = "Qty";
-            dataGridView1.Columns[3].Width = 80;
-            dataGridView1.Columns[3].Name = "qty";
-            dataGridView1.Columns[4].HeaderText = "Subtotal";
-            dataGridView1.Columns[4].Width = 150;
-            dataGridView1.Columns[4].Name = "subtotal";
+                dataGridView1.Columns[0].HeaderText = "No";
+                dataGridView1.Columns[0].Width = 40;
+                dataGridView1.Columns[1].HeaderText = "Nama Produk";
+                dataGridView1.Columns[1].Width = 350;
+                dataGridView1.Columns[1].Name = "nama_produk";
+                dataGridView1.Columns[2].HeaderText = "Harga";
+                dataGridView1.Columns[2].Width = 150;
+                dataGridView1.Columns[2].Name = "harga";
+                dataGridView1.Columns[3].HeaderText = "Qty";
+                dataGridView1.Columns[3].Width = 80;
+                dataGridView1.Columns[3].Name = "qty";
+                dataGridView1.Columns[4].HeaderText = "Subtotal";
+                dataGridView1.Columns[4].Width = 150;
+                dataGridView1.Columns[4].Name = "subtotal";
+            }
         }
 
         private AutoCompleteStringCollection DataProduk()

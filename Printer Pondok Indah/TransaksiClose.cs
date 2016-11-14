@@ -406,6 +406,7 @@ namespace Printer_Pondok_Indah
             JObject dataBayar = new JObject();
             dataBayar["kasir"] = txt_kasir.Text;
             dataBayar["waiters"] = this.karyawan;
+            dataBayar["customer"] = txt_customer.Text;
             dataBayar["total"] = String.Format("{0:C}", total).Substring(2);
             dataBayar["tax_pro"] = this.tax_procentage;
             dataBayar["tax"] = String.Format("{0:C}", int.Parse(txt_tax.Text)).Substring(2);
