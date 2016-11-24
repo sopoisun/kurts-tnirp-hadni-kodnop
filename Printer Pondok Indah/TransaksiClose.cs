@@ -416,7 +416,8 @@ namespace Printer_Pondok_Indah
             dataBayar["diskon"] = String.Format("{0:C}", int.Parse(txt_diskon.Text)).Substring(2);
             dataBayar["sisa"] = String.Format("{0:C}", int.Parse(txt_jumlah.Text)).Substring(2);
             dataBayar["bayar"] = String.Format("{0:C}", int.Parse(txt_bayar.Text)).Substring(2);
-            dataBayar["kembali"] = String.Format("{0:C}", int.Parse(txt_kembali.Text)).Substring(2);            
+            dataBayar["kembali"] = String.Format("{0:C}", int.Parse(txt_kembali.Text)).Substring(2);
+            dataBayar["jam"] = String.Format("{0:HH:mm:ss}", DateTime.Now).Replace(".", ":");
 
             return dataBayar;
         }

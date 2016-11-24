@@ -106,10 +106,10 @@ namespace Printer_Pondok_Indah
             e.Graphics.DrawString("-------------------------------", objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
 
-            this._txt = "Nota : " + this.nota;
+            this._txt = this.nota;
             this._length = this._txt.Length;
 
-            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, DateTime.Now.Date.ToString("dd/MM/yyyy"));
+            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, DateTime.Now.Date.ToString("dd/MM/yyyy") + " " + this.dataBayar["jam"].ToString().Substring(0, 5).ToString());
 
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
