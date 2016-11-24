@@ -109,7 +109,7 @@ namespace Printer_Pondok_Indah
             this._txt = this.nota;
             this._length = this._txt.Length;
 
-            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, DateTime.Now.Date.ToString("dd/MM/yyyy") + " " + this.dataBayar["jam"].ToString().Substring(0, 5).ToString());
+            text = String.Format("{0, " + this._length + "} {1, " + (10 + (20 - this._length)) + "}", this._txt, this.dataBayar["tanggal_jam"].ToString());
 
             e.Graphics.DrawString(text, objFont, Brushes.Black, fLeftMargin, fTopMargin);
             fTopMargin += objFont.GetHeight() * 1;//skip two lines
