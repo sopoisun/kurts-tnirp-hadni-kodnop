@@ -53,6 +53,7 @@
             this.dgvproduk_btnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.readstok = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.group_produk.SuspendLayout();
@@ -151,6 +152,7 @@
             this.group_produk.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.group_produk.Controls.Add(this.readstok);
             this.group_produk.Controls.Add(this.qtyProduk);
             this.group_produk.Controls.Add(this.label5);
             this.group_produk.Controls.Add(this.button1);
@@ -305,6 +307,18 @@
             this.dataGridView1.Size = new System.Drawing.Size(952, 563);
             this.dataGridView1.TabIndex = 7;
             // 
+            // readstok
+            // 
+            this.readstok.AutoSize = true;
+            this.readstok.Checked = true;
+            this.readstok.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.readstok.Location = new System.Drawing.Point(687, 26);
+            this.readstok.Name = "readstok";
+            this.readstok.Size = new System.Drawing.Size(74, 17);
+            this.readstok.TabIndex = 7;
+            this.readstok.Text = "Baca stok";
+            this.readstok.UseVisualStyleBackColor = true;
+            // 
             // TransaksiChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,5 +374,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvproduk_subtotal;
         private System.Windows.Forms.DataGridViewButtonColumn dgvproduk_btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox readstok;
     }
 }

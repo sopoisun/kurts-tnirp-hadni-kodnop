@@ -88,7 +88,16 @@ namespace Printer_Pondok_Indah
                     if (this.match.Success)
                     {
                         _produk_id = this.match.Value.ToString();
-                        _stokAccept = Connection.GetInstance().CheckStok(_produk_id, _qty);
+
+                        if ( this.readstok.Checked )
+                        {
+                            _stokAccept = Connection.GetInstance().CheckStok(_produk_id, _qty);
+                        }
+                        else
+                        {
+                            _stokAccept = 1;
+                        }
+                        
 
                         if (_stokAccept >= 1)
                         {
@@ -269,7 +278,16 @@ namespace Printer_Pondok_Indah
                         this.match = regex.Match(_karyawan_id);
                         _karyawan_id = this.match.Value.ToString();
 
-                        int res = int.Parse(Connection.GetInstance().OpenTransaksi(dateTimePicker1.Value.ToString("yyyy-MM-dd"), _dProduk, _karyawan_id, _dPlace));
+                        int res = 0;
+
+                        if (!this.readstok.Checked)
+                        {
+                            res = int.Parse(Connection.GetInstance().OpenTransaksi(dateTimePicker1.Value.ToString("yyyy-MM-dd"), _dProduk, _karyawan_id, _dPlace));
+                        }
+                        else
+                        {
+                            res = int.Parse(Connection.GetInstance().OpenTransaksi(dateTimePicker1.Value.ToString("yyyy-MM-dd"), _dProduk, _karyawan_id, _dPlace, 1));
+                        }
 
                         if (res > 0)
                         {

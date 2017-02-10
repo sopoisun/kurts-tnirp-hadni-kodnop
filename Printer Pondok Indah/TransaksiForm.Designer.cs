@@ -60,6 +60,7 @@
             this.btnSaveTransaksi = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_karyawan = new System.Windows.Forms.TextBox();
+            this.readstok = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_produk)).BeginInit();
             this.group_produk.SuspendLayout();
             this.group_place.SuspendLayout();
@@ -174,6 +175,7 @@
             // 
             this.group_produk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.group_produk.Controls.Add(this.readstok);
             this.group_produk.Controls.Add(this.button3);
             this.group_produk.Controls.Add(this.qtyProduk);
             this.group_produk.Controls.Add(this.label5);
@@ -370,6 +372,18 @@
             this.txt_karyawan.Size = new System.Drawing.Size(231, 20);
             this.txt_karyawan.TabIndex = 9;
             // 
+            // readstok
+            // 
+            this.readstok.AutoSize = true;
+            this.readstok.Checked = true;
+            this.readstok.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.readstok.Location = new System.Drawing.Point(809, 26);
+            this.readstok.Name = "readstok";
+            this.readstok.Size = new System.Drawing.Size(74, 17);
+            this.readstok.TabIndex = 8;
+            this.readstok.Text = "Baca stok";
+            this.readstok.UseVisualStyleBackColor = true;
+            // 
             // TransaksiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,5 +446,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_karyawan;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox readstok;
     }
 }

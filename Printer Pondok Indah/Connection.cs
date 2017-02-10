@@ -202,11 +202,33 @@ namespace Printer_Pondok_Indah
             return this.HttpPost(this.url + "transaksi/save?api_token=" + MainForm.TOKEN, data);
         }
 
+        public string OpenTransaksi(string tanggal, string data_order, string karyawan_id, string places, int readstok)
+        {
+            this.data = new NameValueCollection();
+            this.data["tanggal"] = tanggal;
+            this.data["data_order"] = data_order;
+            this.data["karyawan_id"] = karyawan_id;
+            this.data["places"] = places;
+            this.data["readstok"] = "yes";
+
+            return this.HttpPost(this.url + "transaksi/save?api_token=" + MainForm.TOKEN, data);
+        }
+
         public string ChangeTransaksi(string orderID, string data_order)
         {
             this.data = new NameValueCollection();
             this.data["id"] = orderID;
             this.data["data_order"] = data_order;
+
+            return this.HttpPost(this.url + "transaksi/change?api_token=" + MainForm.TOKEN, data);
+        }
+
+        public string ChangeTransaksi(string orderID, string data_order, int readstok)
+        {
+            this.data = new NameValueCollection();
+            this.data["id"] = orderID;
+            this.data["data_order"] = data_order;
+            this.data["readstok"] = "yes";
 
             return this.HttpPost(this.url + "transaksi/change?api_token=" + MainForm.TOKEN, data);
         }
