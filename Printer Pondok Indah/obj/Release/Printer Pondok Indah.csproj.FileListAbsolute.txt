@@ -38,3 +38,5 @@ C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printe
 C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.Properties.Resources.resources
 C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer_Pondok_Indah.TransaksiTable.resources
 C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\obj\Release\Printer Pondok Indah.csproj.GenerateResource.Cache
+C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\bin\Release\PondokIndah.dll
+C:\Users\Strom\Documents\Visual Studio 2008\Projects\Printer Pondok Indah\Printer Pondok Indah\bin\Release\PondokIndah.pdb

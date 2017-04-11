@@ -9,6 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PondokIndah;
 
 namespace Printer_Pondok_Indah
 {
@@ -16,7 +17,7 @@ namespace Printer_Pondok_Indah
     {
         public Connection()
         {
-
+            this.url = PondokIndah.Server.ADDR+"/api/";
         }
 
         /* using singleton pattern*/
@@ -35,7 +36,7 @@ namespace Printer_Pondok_Indah
         private string resultString;
         private DataSet ds = new DataSet();
         private NameValueCollection data = new NameValueCollection();
-        private string url = "http://localhost/restoran/public/api/";
+        private string url = "";
 
         private string HttpPost(string uri, NameValueCollection data)
         {
